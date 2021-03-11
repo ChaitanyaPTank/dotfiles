@@ -1,0 +1,40 @@
+{
+
+    "coc.preferences.formatOnSaveFiletypes": [
+        "css",
+        "markdown",
+        "javascript",
+        "graphql",
+        "html",
+        "yaml",
+        "json",
+        "python"
+    ],
+
+    "json.format.enable": false,
+
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "snippets.ultisnips.directories": [
+        "UltiSnips",
+        "~/.config/nvim/utils/snips"
+    ],
+
+    "typescript.format.enabled": false,
+    "tsserver.enable": true,
+
+    "html.enable": true,
+    "html.suggest.ionic": true,
+    "html.format.enable": false,
+    "html.suggest.html5": true,
+    "html.autoClosingTags": true,
+
+    "javascript.format.enabled": false,
+    "javascript.suggest.names": true,
+    "javascript.suggest.enabled": true,
+    "javascript.suggest.completeFunctionCalls": true,
+    "javascript.suggest.autoImports": true,
+
+    "clangd.enabled": true
+
+}
