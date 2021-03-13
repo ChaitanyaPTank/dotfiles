@@ -16,7 +16,7 @@ set expandtab
 set copyindent
 
 " setting powershell as the default terminal
-set shell=powershell
+set shell=powershell.exe
 set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
 set shellpipe=\|
 set shellredir=\|\ Out-File\ -Encoding\ UTF8
@@ -67,3 +67,5 @@ nmap <C-w>
 autocmd vimenter * NERDTree
 map <C-n> :NERDTreeToggle<CR>
 tnoremap <Esc> <C-\><C-n>
+
+" autocmd GUIEnter * silent! nvim_ui_attach(200, 300, ui_multigrid, ui_popuomenu)
