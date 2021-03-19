@@ -9,7 +9,7 @@ set encoding=utf-8
 set shiftwidth=4
 set tabstop=4
 set guioptions-=T "No Toolbar
-set linespace=4
+" set linespace=4
 set number relativenumber
 set ruler
 set clipboard+=unnamed
@@ -25,10 +25,11 @@ if has('unix')
     call plug#begin('~/vimfiles/plugged')
     source $HOME/vim-plug.vim
     call plug#end()
-    let g:airline_theme="ayu_mirage"
+    let g:airline_theme="one"
     set termguicolors
-    let g:ayucolor="mirage"
-    colorscheme ayu
+    colorscheme one
+    set bg=dark
+    set termguicolors
     if &term =~ "screen."
         let &t_ti.="\eP\e[1 q\e\\"
         let &t_SI.="\eP\e[5 q\e\\"
@@ -40,6 +41,7 @@ if has('unix')
         let &t_EI.="\<Esc>[1 q"
         let &t_te.="\<Esc>[0 q"
     endif
+    let g:coc_data_home='/c/Users/NEELKANTH/.config/coc'
 endif
 
 
@@ -51,9 +53,20 @@ if has('win32')
     call plug#begin('~/vimfiles/plugged')
     source $HOME/vim-plug.vim
     call plug#end()
-    colorscheme gruvbox
-    set bg=light
+    colorscheme one
     set termguicolors
+    if &term =~ "screen."
+        let &t_ti.="\eP\e[1 q\e\\"
+        let &t_SI.="\eP\e[5 q\e\\"
+        let &t_EI.="\eP\e[1 q\e\\"
+        let &t_te.="\eP\e[0 q\e\\"
+    else
+        let &t_ti.="\<Esc>[1 q"
+        let &t_SI.="\<Esc>[5 q"
+        let &t_EI.="\<Esc>[1 q"
+        let &t_te.="\<Esc>[0 q"
+    endif
+
 endif
 
 "Opens NERDTree on startup

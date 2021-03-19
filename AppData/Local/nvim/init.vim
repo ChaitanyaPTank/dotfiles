@@ -23,7 +23,7 @@ set shellredir=\|\ Out-File\ -Encoding\ UTF8
 set shellquote=
 set shellxquote=
 
-cd D:\Chaitanya\JavaScript\WebRefine\
+cd D:\Chaitanya\
 let g:python_host_prog="C:/Python27/python2.exe"
 inoremap <silent> <S-Insert> <C-R>+
 nnoremap <C-6> <C-^>
@@ -44,7 +44,7 @@ filetype plugin indent on
 " colorscheme PaperColor
 "
 let ayucolor="light"
-colorscheme ayu
+colorscheme one
 
 let g:airline_powerline_fonts=1
 
@@ -68,4 +68,4 @@ autocmd vimenter * NERDTree
 map <C-n> :NERDTreeToggle<CR>
 tnoremap <Esc> <C-\><C-n>
 
-" autocmd GUIEnter * silent! nvim_ui_attach(200, 300, ui_multigrid, ui_popuomenu)
+" autocmd GUIEnter * silent! nvim_ui_detach(200, 300, ext_cmdline)
