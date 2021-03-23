@@ -69,3 +69,4 @@ map <C-n> :NERDTreeToggle<CR>
 tnoremap <Esc> <C-\><C-n>
 
 " autocmd GUIEnter * silent! nvim_ui_detach(200, 300, ext_cmdline)
+set termguicolors

@@ -11,6 +11,7 @@
         "python"
     ],
 
+    "snippets.userSnippetsDirectory": "C:\\Users\\NEELKANTH\\AppData\\Local\\coc\\extensions\\node_modules\\coc-tsserver\\snippets\\",
     "snippets.autoTrigger": true,
     "snippets.ultisnips.enable": true,
     "snippets.loadFromExtensions": true,

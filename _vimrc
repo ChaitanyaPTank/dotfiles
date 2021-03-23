@@ -20,7 +20,7 @@ set fillchars+=vert:\|
 
 " Vim Plug
 if has('unix')
-    cd /d/Chaitanya/
+    cd %:p:h
     so /c/Users/NEELKANTH/vimfiles/plugged/delimitMate/test/_setup.vim
     call plug#begin('~/vimfiles/plugged')
     source $HOME/vim-plug.vim
@@ -48,11 +48,17 @@ endif
 syntax on
 
 if has('win32')
-    cd D:\Chaitanya\ "JavaScript\WebRefine\
+    cd %:p:h
     so C:\Users\NEELKANTH\vimfiles\plugged\delimitMate\test\_setup.vim
     call plug#begin('~/vimfiles/plugged')
     source $HOME/vim-plug.vim
     call plug#end()
+    set shell=powershell.exe
+    set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
+    set shellpipe=\|
+    set shellredir=\|\ Out-File\ -Encoding\ UTF8
+    set shellquote=
+    set shellxquote=
     colorscheme one
     set termguicolors
     if &term =~ "screen."
