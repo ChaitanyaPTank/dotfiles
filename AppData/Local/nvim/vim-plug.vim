@@ -13,5 +13,7 @@ Plug 'lambdalisue/vim-fullscreen'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
-Plug 'joshdick/onedark.vim'
 Plug 'rakr/vim-one'
+Plug 'junegunn/fzf', { 'do' : { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'

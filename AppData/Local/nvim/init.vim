@@ -16,12 +16,12 @@ set expandtab
 set copyindent
 
 " setting powershell as the default terminal
-set shell=powershell.exe
-set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
-set shellpipe=\|
-set shellredir=\|\ Out-File\ -Encoding\ UTF8
-set shellquote=
-set shellxquote=
+" set shell=powershell.exe
+" set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
+" set shellpipe=\|
+" set shellredir=\|\ Out-File\ -Encoding\ UTF8
+" set shellquote=
+" set shellxquote=
 
 cd D:\Chaitanya\
 let g:python_host_prog="C:/Python27/python2.exe"
@@ -60,6 +60,7 @@ let g:airline_theme='base16'
 nmap <C-c> :TComment<CR>
 nnoremap <C-CR> <F11>
 nmap <C-w>
+
 "NERDTree Binding
 autocmd vimenter * NERDTree
 map <C-n> :NERDTreeToggle<CR>
@@ -68,3 +69,5 @@ tnoremap <Esc> <C-\><C-n>
 " autocmd GUIEnter * silent! nvim_ui_detach(200, 300, ext_cmdline)
 set termguicolors
 set colorcolumn=90
+
+source ~/AppData/Local/nvim/fzf.vim
