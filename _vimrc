@@ -54,12 +54,6 @@ if has('win32')
     call plug#begin('~/vimfiles/plugged')
     source $HOME/vim-plug.vim
     call plug#end()
-    set shell=powershell.exe
-    set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
-    set shellpipe=\|
-    set shellredir=\|\ Out-File\ -Encoding\ UTF8
-    set shellquote=
-    set shellxquote=
     colorscheme one
     set termguicolors
     if &term =~ "screen."
