@@ -40,9 +40,7 @@ source ~/AppData/Local/nvim/coc.vim
 filetype plugin indent on
 
 "Setting theme
-" set background=light
-" colorscheme PaperColor
-"
+
 let ayucolor="light"
 colorscheme one
 
@@ -51,7 +49,6 @@ let g:airline_powerline_fonts=1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-
 
 let g:airline#extensions#hunks#enabled=1
 let g:airline#extensions#branch#enabled=1
@@ -70,3 +67,4 @@ tnoremap <Esc> <C-\><C-n>
 
 " autocmd GUIEnter * silent! nvim_ui_detach(200, 300, ext_cmdline)
 set termguicolors
+set colorcolumn=90

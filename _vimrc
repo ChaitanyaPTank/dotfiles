@@ -17,10 +17,11 @@ set fileencoding=utf-8
 set fileencodings=utf-8
 set cursorline
 set fillchars+=vert:\|
+set colorcolumn=80
 
 " Vim Plug
 if has('unix')
-    cd %:p:h
+    cd /d
     so /c/Users/NEELKANTH/vimfiles/plugged/delimitMate/test/_setup.vim
     call plug#begin('~/vimfiles/plugged')
     source $HOME/vim-plug.vim
@@ -48,7 +49,7 @@ endif
 syntax on
 
 if has('win32')
-    cd %:p:h
+    cd D:\Chaitanya
     so C:\Users\NEELKANTH\vimfiles\plugged\delimitMate\test\_setup.vim
     call plug#begin('~/vimfiles/plugged')
     source $HOME/vim-plug.vim
