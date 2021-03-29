@@ -16,6 +16,7 @@ set expandtab
 set copyindent
 
 " setting powershell as the default terminal
+" this slowdowns the PC as per some github issues
 " set shell=powershell.exe
 " set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
 " set shellpipe=\|
@@ -69,5 +70,3 @@ tnoremap <Esc> <C-\><C-n>
 " autocmd GUIEnter * silent! nvim_ui_detach(200, 300, ext_cmdline)
 set termguicolors
 set colorcolumn=90
-
-source ~/AppData/Local/nvim/fzf.vim

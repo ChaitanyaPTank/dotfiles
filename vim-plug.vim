@@ -14,5 +14,3 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'rakr/vim-one'
 Plug 'sheerun/vim-polyglot'
 " Plug 'NLKNguyen/papercolor-theme'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'

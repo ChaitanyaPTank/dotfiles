@@ -1,8 +1,6 @@
 Plug 'preservim/nerdtree'
 Plug 'Raimondi/delimitMate'
 Plug 'tomasr/molokai'
-Plug 'ayu-theme/ayu-vim'
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -14,6 +12,4 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'rakr/vim-one'
-Plug 'junegunn/fzf', { 'do' : { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-rooter'
+Plug 'drewtempelmeyer/palenight.vim'
