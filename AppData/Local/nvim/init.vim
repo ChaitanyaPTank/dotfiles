@@ -90,3 +90,6 @@ nnoremap nt :FloatermToggle<CR>
 " for buffer switching
 nnoremap bn :bn<Cr>
 nnoremap bp :bp<Cr>
+
+" FZF bindings
+nnoremap <S-f> :Files<Cr>
