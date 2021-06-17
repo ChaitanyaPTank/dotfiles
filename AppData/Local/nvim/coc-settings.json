@@ -45,6 +45,9 @@
 
     "json.format.enable": false,
 
+    "pyright.enable": true,
+    "python.analysis.autoSearchPaths": true,
+    "python.pythonPath": "C:/Users/NEELKANTH/AppData/Local/Programs/Python/Python39/python.exe",
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
     "snippets.ultisnips.directories": [

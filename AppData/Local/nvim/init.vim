@@ -42,8 +42,9 @@ filetype plugin indent on
 
 "Setting theme
 
-let ayucolor="light"
-colorscheme one
+" let ayucolor="light"
+" colorscheme one
+colorscheme darcula
 
 let g:airline_powerline_fonts=1
 
@@ -55,8 +56,7 @@ let g:airline#extensions#hunks#enabled=1
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline_symbols.notexists='∄'
-
-let g:airline_theme='base16'
+let g:airline_theme='google_dark'
 
 nmap <C-c> :TComment<CR>
 nnoremap <C-CR> <F11>
@@ -70,3 +70,23 @@ tnoremap <Esc> <C-\><C-n>
 " autocmd GUIEnter * silent! nvim_ui_detach(200, 300, ext_cmdline)
 set termguicolors
 set colorcolumn=90
+
+" for emmet plugin
+function! s:emmet_tab()
+  let line = getline('.')
+  if match(line, '<.*>') >= 0
+    return "\<c-y>n"
+  endif
+  return "\<c-y>,"
+endfunction
+autocmd FileType html imap <buffer><expr><tab> <sid>emmet_tab()
+
+" floaterm configs
+let g:floaterm_height=0.7
+let g:floaterm_width=0.8
+
+nnoremap nt :FloatermToggle<CR>
+
+" for buffer switching
+nnoremap bn :bn<Cr>
+nnoremap bp :bp<Cr>

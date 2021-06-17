@@ -18,6 +18,7 @@ set fileencodings=utf-8
 set cursorline
 set fillchars+=vert:\|
 set colorcolumn=80
+runtime macros/matchit.vim
 
 " Vim Plug
 if has('unix')
@@ -27,8 +28,7 @@ if has('unix')
     source $HOME/vim-plug.vim
     call plug#end()
     let g:airline_theme="one"
-    set termguicolors
-    colorscheme one
+    colorscheme darcula
     set bg=dark
     set termguicolors
     if &term =~ "screen."
@@ -54,7 +54,7 @@ if has('win32')
     call plug#begin('~/vimfiles/plugged')
     source $HOME/vim-plug.vim
     call plug#end()
-    colorscheme one
+    colorscheme darcula
     set termguicolors
     if &term =~ "screen."
         let &t_ti.="\eP\e[1 q\e\\"
@@ -111,3 +111,13 @@ let g:airline#extensions#branch#enabled = 1
 source $HOME/coc.vim
 
 filetype plugin indent on " Required 
+
+" for emmet plugin
+function! s:emmet_tab()
+  let line = getline('.')
+  if match(line, '<.*>') >= 0
+    return "\<c-y>n"
+  endif
+  return "\<c-y>,"
+endfunction
+autocmd FileType html imap <buffer><expr><tab> <sid>emmet_tab()
