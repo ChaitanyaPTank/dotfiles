@@ -9,11 +9,6 @@ vim.opt.colorcolumn = "80"
 vim.opt.expandtab = true
 vim.opt.cursorline = true
 
-
--- mapleader to space
-vim.g.mapleader = " "
-
-
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

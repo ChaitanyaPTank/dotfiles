@@ -1,16 +1,17 @@
 local lsp = require("lsp-zero")
 
-lsp.preset("recommended")
-
-lsp.ensure_installed({
-  'tsserver',
-  'lua_ls',
-  'html',
-  'angularls@15.2.1'
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {
+    'tsserver',
+    'lua_ls',
+    'html',
+    'angularls'
+  },
+  handlers = { lsp.default_setup }
 })
 
--- Fix Undefined global 'vim'
-lsp.nvim_workspace()
+lsp.preset("recommended")
 
 
 local cmp = require('cmp')
@@ -20,7 +21,7 @@ local completion_actions = lsp.cmp_action()
 
 
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
+local cmp_mappings = cmp.mapping.preset.insert({
   ['<Up>'] = cmp.mapping.select_prev_item(cmp_select),
   ['<Down>'] = cmp.mapping.select_next_item(cmp_select),
   ['<CR>'] = cmp.mapping.confirm({ select = false }),
@@ -37,7 +38,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 })
 
 
-lsp.setup_nvim_cmp({
+cmp.setup({
   mapping = cmp_mappings,
   snippet = {
     expand = function(args)
@@ -48,9 +49,6 @@ lsp.setup_nvim_cmp({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
-  -- window = {
-  --   documentation = cmp.config.window.bordered()
-  -- }
 })
 
 require('luasnip.loaders.from_vscode').lazy_load()
@@ -80,3 +78,4 @@ lsp.setup()
 
 
 vim.diagnostic.config({ virtual_text = true })
+
