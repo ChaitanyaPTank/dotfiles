@@ -60,7 +60,7 @@ require('lazy').setup({
   'rcarriga/nvim-notify',
   'lukas-reineke/indent-blankline.nvim',
   'jose-elias-alvarez/null-ls.nvim',
-  { 'akinsho/bufferline.nvim' },
+  -- { 'akinsho/bufferline.nvim' },
   { 'ellisonleao/gruvbox.nvim' },
   { 'akinsho/toggleterm.nvim' },
   'LunarVim/horizon.nvim',

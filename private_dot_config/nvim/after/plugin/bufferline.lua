@@ -1,5 +1,5 @@
-require('bufferline').setup({
-  options = {
-    mode = 'buffers',
-  }
-})
+-- require('bufferline').setup({
+--   options = {
+--     mode = 'buffers',
+--   }
+-- })
