@@ -75,5 +75,47 @@ require('lazy').setup({
   { 'saadparwaiz1/cmp_luasnip' },
   'Bekaboo/dropbar.nvim',
   'folke/neodev.nvim',
-  { "elgiano/nvim-treesitter-angular", branch = "topic/jsx-fix" },
+  { 'elgiano/nvim-treesitter-angular', branch = 'topic/jsx-fix' },
+  {
+    'nvim-neorg/neorg',
+    build = ':Neorg sync-parsers',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('neorg').setup {
+        load = {
+          ['core.defaults'] = {},
+          ['core.concealer'] = {},
+          ['core.dirman'] = {
+            config = {
+              workspaces = {
+                notes = '~/notes',
+              },
+              default_workspace = 'notes',
+            },
+          },
+        },
+      }
+
+      vim.wo.foldlevel = 99
+      vim.wo.conceallevel = 2
+    end,
+  },
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim',         -- required
+      'nvim-telescope/telescope.nvim', -- optional
+      'sindrets/diffview.nvim',        -- optional
+      'ibhagwan/fzf-lua',              -- optional
+    },
+    config = true
+  },
+  'nyoom-engineering/oxocarbon.nvim',
+  'equalsraf/neovim-gui-shim',
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build =
+    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  },
+  'hrsh7th/cmp-buffer'
 })

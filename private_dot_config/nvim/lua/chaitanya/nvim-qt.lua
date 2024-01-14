@@ -10,5 +10,7 @@ vim.api.nvim_create_autocmd("UIEnter", {
   once = true,
   callback = function()
     vim.keymap.set("n", "<F11>", "<cmd>lua ToggleFullscreen()<CR>")
+    vim.keymap.set("n", "<C-Tab>", "<cmd>bn<CR>")
+    vim.keymap.set("n", "<C-S-Tab>", "<cmd>bp<CR>")
   end
 })

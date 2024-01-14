@@ -1,4 +1,4 @@
-local lsp = require("lsp-zero")
+local lsp_zero = require("lsp-zero")
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -8,16 +8,23 @@ require('mason-lspconfig').setup({
     'html',
     'angularls'
   },
-  handlers = { lsp.default_setup }
+  handlers = { lsp_zero.default_setup }
 })
 
-lsp.preset("recommended")
+lsp_zero.preset("recommended")
+
+lsp_zero.set_sign_icons({
+  error = '✘',
+  warn = '',
+  hint = '⚑',
+  info = '»'
+})
 
 
 local cmp = require('cmp')
 
 
-local completion_actions = lsp.cmp_action()
+local completion_actions = lsp_zero.cmp_action()
 
 
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -38,6 +45,11 @@ local cmp_mappings = cmp.mapping.preset.insert({
 })
 
 
+require('lspkind').init({
+  preset = 'codicons'
+})
+
+
 cmp.setup({
   mapping = cmp_mappings,
   snippet = {
@@ -47,15 +59,25 @@ cmp.setup({
   },
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'buffer' },
     { name = 'luasnip' },
   },
+  formatting = {
+    fields = { 'kind', 'abbr', 'menu' },
+    format = require('lspkind').cmp_format({
+      mode = 'symbol',       -- show only symbol annotations
+      -- maxwidth = 50,         -- prevent the popup from showing more than provided characters
+      ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead
+    })
+  }
 })
+
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
 
-lsp.on_attach(function(client, bufnr)
-  lsp.default_keymaps({ buffer = bufnr })
+lsp_zero.on_attach(function(client, bufnr)
+  lsp_zero.default_keymaps({ buffer = bufnr })
 
   local opts = { buffer = bufnr, remap = false }
 
@@ -74,8 +96,7 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 
-lsp.setup()
+lsp_zero.setup()
 
 
 vim.diagnostic.config({ virtual_text = true })
-

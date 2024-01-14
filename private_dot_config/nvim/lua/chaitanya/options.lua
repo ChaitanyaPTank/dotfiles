@@ -8,6 +8,7 @@ vim.opt.hlsearch = false
 vim.opt.colorcolumn = "80"
 vim.opt.expandtab = true
 vim.opt.cursorline = true
+vim.opt.wrap = false
 
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1

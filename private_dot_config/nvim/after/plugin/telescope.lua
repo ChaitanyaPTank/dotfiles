@@ -7,8 +7,10 @@ vim.keymap.set('n', 'fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>b', builtin.buffers, {})
 vim.keymap.set('n', '<leader>h', builtin.help_tags, {})
 
+local telescope = require('telescope')
+
 -- ignore node modules and other stuff
-require('telescope').setup({
+telescope.setup({
   defaults = {
     file_ignore_patterns = { "node_modules" },
     preview = false,
@@ -17,5 +19,16 @@ require('telescope').setup({
     find_files = {
       theme = "dropdown",
     },
+  },
+  extensions = {
+    fzf = {
+      fuzzy = true,                   -- false will only do exact matching
+      override_generic_sorter = true, -- override the generic sorter
+      override_file_sorter = true,    -- override the file sorter
+      case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+      -- the default case_mode is "smart_case"
+    }
   }
 })
+
+telescope.load_extension('fzf')
