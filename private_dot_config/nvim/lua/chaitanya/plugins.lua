@@ -43,7 +43,6 @@ require('lazy').setup({
     version = '*',
     config = function() require('nvim-surround').setup() end
   },
-  'doums/darcula',
   'folke/zen-mode.nvim',
 
   { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
@@ -117,5 +116,17 @@ require('lazy').setup({
     build =
     'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   },
-  'hrsh7th/cmp-buffer'
+  'hrsh7th/cmp-buffer',
+  'HiPhish/rainbow-delimiters.nvim',
+  {
+    'glacambre/firenvim',
+
+    -- Lazy load firenvim
+    -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
+    lazy = not vim.g.started_by_firenvim,
+    build = function()
+      vim.fn["firenvim#install"](0)
+    end
+  },
+  'stevearc/dressing.nvim',
 })

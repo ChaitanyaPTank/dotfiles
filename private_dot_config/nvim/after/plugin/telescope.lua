@@ -6,6 +6,7 @@ vim.keymap.set('n', '<leader>g', builtin.git_files, {})
 vim.keymap.set('n', 'fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>b', builtin.buffers, {})
 vim.keymap.set('n', '<leader>h', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>o', builtin.lsp_document_symbols, {})
 
 local telescope = require('telescope')
 
@@ -13,12 +14,26 @@ local telescope = require('telescope')
 telescope.setup({
   defaults = {
     file_ignore_patterns = { "node_modules" },
-    preview = false,
+    preview = false
   },
   pickers = {
     find_files = {
       theme = "dropdown",
     },
+    buffers = {
+      theme = "dropdown"
+    },
+    git_files = {
+      theme = "dropdown"
+    },
+    live_grep = {
+      mirror = true,
+      preview = true
+    },
+    lsp_document_symbols = {
+      theme = "dropdown",
+      preview = true
+    }
   },
   extensions = {
     fzf = {

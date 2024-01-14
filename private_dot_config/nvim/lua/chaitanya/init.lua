@@ -2,6 +2,7 @@ require('chaitanya.plugins')
 require('chaitanya.options')
 require('chaitanya.remap')
 require('chaitanya.nvim-qt')
+require('chaitanya.gui')
 
 require('neodev').setup()
 

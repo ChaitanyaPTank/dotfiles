@@ -100,3 +100,16 @@ lsp_zero.setup()
 
 
 vim.diagnostic.config({ virtual_text = true })
+
+
+function name(name)
+  print(name)
+  print(name)
+  print(name)
+  print(name)
+  print(name)
+  print(name)
+  function new_name(name)
+    print('new', name)
+  end
+end
