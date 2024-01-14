@@ -6,53 +6,54 @@ lsp.ensure_installed({
   'tsserver',
   'lua_ls',
   'html',
+  'angularls@15.2.1'
 })
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
 
 
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
-
 local cmp = require('cmp')
 
 
-function space_tab_mapping()
-  return cmp.mapping(
-    function(fallback)
-      local col = vim.fn.col('.')
-      if cmp.visible() then
-        cmp.select_next_item(cmp_select)
-      elseif has_words_before() then
-        cmp.complete()
-      else
-        fallback()
-      end
-    end,
-    { 'i', 's' }
-  )
-end
+local completion_actions = lsp.cmp_action()
+
 
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<Up>'] = cmp.mapping.select_prev_item(cmp_select),
   ['<Down>'] = cmp.mapping.select_next_item(cmp_select),
   ['<CR>'] = cmp.mapping.confirm({ select = false }),
-  ['<C-Space>'] = space_tab_mapping(),
-  ['<Tab>'] = space_tab_mapping(),
+  ['<C-Space>'] = cmp.mapping(
+    function()
+      if cmp.visible() then
+        cmp.mapping.select_next_item()
+      else
+        cmp.complete()
+      end
+    end
+  ),
+  ['<Tab>'] = completion_actions.luasnip_supertab()
 })
 
 
 lsp.setup_nvim_cmp({
   mapping = cmp_mappings,
-  window = {
-    documentation = cmp.config.window.bordered()
-  }
+  snippet = {
+    expand = function(args)
+      require 'luasnip'.lsp_expand(args.body)
+    end
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
+  -- window = {
+  --   documentation = cmp.config.window.bordered()
+  -- }
 })
+
+require('luasnip.loaders.from_vscode').lazy_load()
 
 
 lsp.on_attach(function(client, bufnr)
@@ -64,7 +65,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
   vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-  vim.keymap.set("n", "[d", function() vim.diagnonnic.goto_next() end, opts)
+  vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
   vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
   vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)

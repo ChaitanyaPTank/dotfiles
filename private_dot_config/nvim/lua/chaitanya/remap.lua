@@ -14,5 +14,7 @@ vim.keymap.set('n', '<leader>n', ':bn<CR>')
 vim.keymap.set('n', '<leader>p', ':bprev<CR>')
 
 
-vim.keymap.set('n', '<leader>t', ':ToggleTerm<CR>')
-vim.keymap.set('t', '<leader>t', '<C-\\><C-n>:ToggleTerm<CR>')
+vim.keymap.set('n', '<Bslash>t', ':ToggleTerm<CR>')
+vim.keymap.set('t', '<Bslash>t', '<C-\\><C-n>:ToggleTerm<CR>')
+
+vim.keymap.set('n', 'cie', 'ggVGd')

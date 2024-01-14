@@ -36,11 +36,15 @@ export PATH=/home/agilelpt56/.local/bin:$PATH
 
 
 # Load Angular CLI autocompletion.
-if type "$ng" > /dev/null; then
+# if type "$ng" > /dev/null; then
   source <(ng completion script)
   skip_global_compinit=1
-fi
+# fi
 
 export DENO_INSTALL="/home/agilelpt56/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

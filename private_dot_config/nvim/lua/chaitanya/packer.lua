@@ -1,8 +1,11 @@
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
-  use { 'm4xshen/autoclose.nvim', config = function() require('autoclose').setup() end }
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    'm4xshen/autoclose.nvim',
+    config = function() require('autoclose').setup() end
+  }
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.2',
     requires = { { 'nvim-lua/plenary.nvim' }, },
   } -- file finder type
   use 'onsails/lspkind.nvim'
@@ -14,10 +17,19 @@ require('packer').startup(function(use)
   }
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
+    run = function()
+      local ts_update = require('nvim-treesitter.install')
+          .update({ with_sync = true })
+      ts_update()
+    end,
     config = function()
       local config = require('nvim-treesitter.configs')
-      config.setup({ highlight = { enable = true } })
+      config.setup({
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false
+        }
+      })
     end
   }
   use {
@@ -30,7 +42,7 @@ require('packer').startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
-  use 'nvim-treesitter/nvim-treesitter-angular'
+  -- use 'nvim-treesitter/nvim-treesitter-angular'
   use {
     'kylechui/nvim-surround',
     tag = '*',
@@ -41,7 +53,7 @@ require('packer').startup(function(use)
   use({ 'rose-pine/neovim', as = 'rose-pine' })
   use {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
+    -- branch = 'v2.x',
     requires = {
 
       -- LSP Support
@@ -58,19 +70,19 @@ require('packer').startup(function(use)
   use 'rcarriga/nvim-notify'
   use 'lukas-reineke/indent-blankline.nvim'
   use 'jose-elias-alvarez/null-ls.nvim'
+  use { 'akinsho/bufferline.nvim' }
+  use { 'ellisonleao/gruvbox.nvim' }
+  use { 'akinsho/toggleterm.nvim' }
+  use 'LunarVim/horizon.nvim'
   use {
-    'akinsho/bufferline.nvim', config = function()
-    require('bufferline').setup()
-  end
+    'lewis6991/gitsigns.nvim',
+    config = function() require('gitsigns').setup({}) end
   }
-  use { "catppuccin/nvim", as = "catppuccin" }
-  use { "ellisonleao/gruvbox.nvim" }
-  use {
-    "akinsho/toggleterm.nvim",
-    tag = '*',
-  }
-  use {
-    'glacambre/firenvim',
-    run = function() vim.fn['firenvim#install'](0) end
- }
+  use 'folke/tokyonight.nvim'
+  use 'navarasu/onedark.nvim'
+  use 'rafamadriz/friendly-snippets'
+  use { 'saadparwaiz1/cmp_luasnip' }
+  use 'Bekaboo/dropbar.nvim'
+  use 'folke/neodev.nvim'
+  use { "elgiano/nvim-treesitter-angular", branch = "topic/jsx-fix" }
 end)
