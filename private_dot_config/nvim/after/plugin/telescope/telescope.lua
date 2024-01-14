@@ -51,7 +51,8 @@ telescope.setup({
     },
     live_grep = {
       mirror = true,
-      preview = true
+      preview = true,
+      path_display = filenameFirst
     },
     lsp_document_symbols = {
       theme = "dropdown",
@@ -63,8 +64,7 @@ telescope.setup({
       fuzzy = true,                   -- false will only do exact matching
       override_generic_sorter = true, -- override the generic sorter
       override_file_sorter = true,    -- override the file sorter
-      case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
-      -- the default case_mode is "smart_case"
+      case_mode = "smart_case",       -- or "ignore_case" or "respect_case" the default case_mode is "smart_case"
     }
   }
 })
