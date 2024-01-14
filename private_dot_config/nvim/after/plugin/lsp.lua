@@ -5,39 +5,45 @@ lsp.preset("recommended")
 lsp.ensure_installed({
   'tsserver',
   'lua_ls',
-  'html'
+  'html',
 })
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
 
 
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+
 local cmp = require('cmp')
+
+
+function space_tab_mapping()
+  return cmp.mapping(
+    function(fallback)
+      local col = vim.fn.col('.')
+      if cmp.visible() then
+        cmp.select_next_item(cmp_select)
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+    end,
+    { 'i', 's' }
+  )
+end
+
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<Up>'] = cmp.mapping.select_prev_item(cmp_select),
   ['<Down>'] = cmp.mapping.select_next_item(cmp_select),
   ['<CR>'] = cmp.mapping.confirm({ select = false }),
-  ['<C-Space>'] = function(fallback)
-    if cmp.visible() then
-      cmp.select_next_item()
-      -- elseif has_words_before() then
-      -- cmp.complete()
-    else
-      fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-    end
-  end,
-  ['<Tab>'] = cmp.mapping(function(fallback)
-    local col = vim.fn.col('.') - 1
-
-    if cmp.visible() then
-      cmp.select_next_item(cmp_select)
-    elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-      fallback()
-    else
-      cmp.complete()
-    end
-  end, { 'i', 's' }),
+  ['<C-Space>'] = space_tab_mapping(),
+  ['<Tab>'] = space_tab_mapping(),
 })
 
 

@@ -1,13 +1,24 @@
 require('chaitanya')
 
-vim.cmd [[ colorscheme rose-pine ]]
+vim.cmd [[ colorscheme gruvbox ]]
 
 vim.api.nvim_create_autocmd(
   'BufWritePost',
   {
     group = vim.api.nvim_create_augroup('PACKER', { clear = true }),
-    pattern = 'plugins.lua',
+    pattern = 'packer.lua',
     command = 'source <afile> | PackerCompile',
   }
 )
 
+
+--[[
+vim.cmd [[
+  autocmd BufEnter * if &buftype ==# 'terminal' | startinsert! | endif
+]]
+-- ]]
+
+
+vim.cmd [[
+  autocmd BufWinEnter,WinEnter term://* startinsert
+]]

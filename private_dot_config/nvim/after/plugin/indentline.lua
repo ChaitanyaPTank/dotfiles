@@ -10,7 +10,7 @@ require('indent_blankline').setup({
     "mason",
     "nvdash",
     "nvcheatsheet",
-    "",
+    "packer",
   },
   buftype_exclude = { "terminal" },
   show_trailing_blankline_indent = false,

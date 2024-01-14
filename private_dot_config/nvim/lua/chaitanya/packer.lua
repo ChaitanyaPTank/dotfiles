@@ -6,14 +6,20 @@ require('packer').startup(function(use)
     requires = { { 'nvim-lua/plenary.nvim' }, },
   } -- file finder type
   use 'onsails/lspkind.nvim'
-  use({ 'projekt0n/github-nvim-theme', tag = 'v0.0.7' })
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
   }
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = function()
+      local config = require('nvim-treesitter.configs')
+      config.setup({ highlight = { enable = true } })
+    end
+  }
   use {
     'numToStr/Comment.nvim',
     config = function()
@@ -27,11 +33,11 @@ require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter-angular'
   use {
     'kylechui/nvim-surround',
-    tag = "*",
+    tag = '*',
     config = function() require('nvim-surround').setup() end
   }
   use 'doums/darcula'
-  use "folke/zen-mode.nvim"
+  use 'folke/zen-mode.nvim'
   use({ 'rose-pine/neovim', as = 'rose-pine' })
   use {
     'VonHeikemen/lsp-zero.nvim',
@@ -50,5 +56,21 @@ require('packer').startup(function(use)
     }
   }
   use 'rcarriga/nvim-notify'
-  use "lukas-reineke/indent-blankline.nvim"
+  use 'lukas-reineke/indent-blankline.nvim'
+  use 'jose-elias-alvarez/null-ls.nvim'
+  use {
+    'akinsho/bufferline.nvim', config = function()
+    require('bufferline').setup()
+  end
+  }
+  use { "catppuccin/nvim", as = "catppuccin" }
+  use { "ellisonleao/gruvbox.nvim" }
+  use {
+    "akinsho/toggleterm.nvim",
+    tag = '*',
+  }
+  use {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end
+ }
 end)

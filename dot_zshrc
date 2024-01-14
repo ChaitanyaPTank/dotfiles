@@ -1,0 +1,46 @@
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=1000
+
+alias ls="ls --color"
+alias ll="ls -las --color"
+
+# some important keybindings
+bindkey '^[[Z' reverse-menu-complete
+bindkey ";5D" backward-word
+bindkey ";5C" forward-word
+
+source <(minikube completion zsh)
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# completions
+source <(kubectl completion zsh)
+eval "$(starship init zsh)"
+
+
+# connect vpn
+alias vpn="sudo openvpn --config ~/Chaitanya/config/chaitanya.tank__ssl_vpn_config.ovpn"
+
+
+# automatically change node version
+if [[ -e .nvmrc ]]
+then
+nvm use > /dev/null
+fi
+
+export PATH=/home/agilelpt56/.local/bin:$PATH
+
+
+
+# Load Angular CLI autocompletion.
+if type "$ng" > /dev/null; then
+  source <(ng completion script)
+  skip_global_compinit=1
+fi
+
+export DENO_INSTALL="/home/agilelpt56/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
