@@ -72,7 +72,7 @@ require('lazy').setup({
   'navarasu/onedark.nvim',
   'rafamadriz/friendly-snippets',
   { 'saadparwaiz1/cmp_luasnip' },
-  'Bekaboo/dropbar.nvim',
+  -- 'Bekaboo/dropbar.nvim',
   'folke/neodev.nvim',
   { 'elgiano/nvim-treesitter-angular', branch = 'topic/jsx-fix' },
   {
@@ -113,8 +113,8 @@ require('lazy').setup({
   'equalsraf/neovim-gui-shim',
   {
     'nvim-telescope/telescope-fzf-native.nvim',
-    build =
-    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+    build = 'mingw32-make'
+    -- 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   },
   'hrsh7th/cmp-buffer',
   'HiPhish/rainbow-delimiters.nvim',

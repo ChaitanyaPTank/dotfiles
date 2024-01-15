@@ -11,9 +11,23 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- https://github.com/nvim-telescope/telescope.nvim/issues/2014
+local get_path_and_tail = function(filename)
+  local utils = require('telescope.utils')
+  local bufname_tail = utils.path_tail(filename)
+  local path_without_tail = require('plenary.strings')
+      .truncate(filename, #filename - #bufname_tail, '')
+
+  -- This will trucate absolute URL to relative URL from project root
+  local path_to_display = utils.transform_path({
+    path_display = { 'truncate' },
+  }, path_without_tail)
+
+  return bufname_tail, path_to_display
+end
+
 local function filenameFirst(_, path)
-  local tail = vim.fs.basename(path)
-  local parent = vim.fs.dirname(path)
+  local tail, parent = get_path_and_tail(path)
   if parent == "." then
     return tail
   end
@@ -43,16 +57,16 @@ telescope.setup({
     },
     buffers = {
       theme = "dropdown",
-      path_display = filenameFirst
+      -- path_display = filenameFirst
     },
     git_files = {
       theme = "dropdown",
-      path_display = filenameFirst
+      -- path_display = filenameFirst
     },
     live_grep = {
       mirror = true,
       preview = true,
-      path_display = filenameFirst
+      -- path_display = filenameFirst
     },
     lsp_document_symbols = {
       theme = "dropdown",
