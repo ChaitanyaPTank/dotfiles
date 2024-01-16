@@ -113,7 +113,17 @@ require('lazy').setup({
   'equalsraf/neovim-gui-shim',
   {
     'nvim-telescope/telescope-fzf-native.nvim',
-    build = 'mingw32-make'
+    build = (function()
+      local windows_command = 'mingw32-make'
+      local linux_command = 'make'
+      local os = vim.loop.os_uname().sysname:lower()
+      local is_windows = os:find('windows')
+      if is_windows then
+        return windows_command
+      else
+        return linux_command
+      end
+    end)()
     -- 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   },
   'hrsh7th/cmp-buffer',
