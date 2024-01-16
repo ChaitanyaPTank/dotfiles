@@ -1,3 +1,15 @@
+function get_fzf_build_command()
+  local windows_command = 'mingw32-make'
+  local linux_command = 'make'
+  local os = vim.loop.os_uname().sysname:lower()
+  local is_windows = os:find('windows')
+  if is_windows then
+    return windows_command
+  else
+    return linux_command
+  end
+end
+
 require('lazy').setup({
   {
     'm4xshen/autoclose.nvim',
@@ -113,17 +125,7 @@ require('lazy').setup({
   'equalsraf/neovim-gui-shim',
   {
     'nvim-telescope/telescope-fzf-native.nvim',
-    build = (function()
-      local windows_command = 'mingw32-make'
-      local linux_command = 'make'
-      local os = vim.loop.os_uname().sysname:lower()
-      local is_windows = os:find('windows')
-      if is_windows then
-        return windows_command
-      else
-        return linux_command
-      end
-    end)()
+    build = get_fzf_build_command()
     -- 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   },
   'hrsh7th/cmp-buffer',
