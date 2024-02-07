@@ -10,6 +10,11 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+config.default_prog = {
+	"bash",
+	"--login"
+}
+
 
 -- we don't want paddings
 config.window_padding = {
