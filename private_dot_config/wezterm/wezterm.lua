@@ -1,5 +1,5 @@
 -- Pull in the wezterm API
-local wezterm = require 'wezterm'
+local wezterm = require('wezterm')
 
 -- This table will hold the configuration.
 local config = {}
@@ -11,8 +11,8 @@ if wezterm.config_builder then
 end
 
 config.default_prog = {
-	"bash",
-	"--login"
+  "bash",
+  "--login"
 }
 
 
@@ -30,59 +30,16 @@ config.adjust_window_size_when_changing_font_size = false
 
 
 -- key bindings
-config.keys = {
-  {
-    key = 'd',
-    mods = 'ALT|SHIFT',
-    action = wezterm.action.SplitVertical({ domain = 'CurrentPaneDomain' }),
-  },
-  {
-    key = 'd',
-    mods = 'CTRL|SHIFT',
-    action = wezterm.action.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
-  },
-  {
-    key = 'F11',
-    action = wezterm.action.ToggleFullScreen,
-  },
-  {
-    key = 'r',
-    mods = 'CMD|SHIFT',
-    action = wezterm.action.ReloadConfiguration,
-  },
-  {
-    key = 'w',
-    mods = 'CTRL|SHIFT',
-    action = wezterm.action.CloseCurrentTab({ confirm = false })
-  },
-  {
-    key = 'LeftArrow',
-    mods = 'ALT',
-    action = wezterm.action.ActivatePaneDirection('Prev')
-  },
-  {
-    key = 'RightArrow',
-    mods = 'ALT',
-    action = wezterm.action.ActivatePaneDirection('Next')
-  },
-  {
-    key = 'Z',
-    mods = 'SHIFT',
-    action = wezterm.action.TogglePaneZoomState,
-  },
-  {
-    key = 'P',
-    mods = 'CTRL|SHIFT',
-    action = wezterm.action.ActivateCommandPalette,
-  },
-}
+config.keys = require('key-maps')
 
 
-config.color_scheme = 'Chalk'
+-- config.color_scheme = 'Chalk'
+-- config.color_scheme = 'OneDark (base16)'
+config.color_scheme = 'Catppuccin Frappe'
 
 
 -- allow resize by mouse
-config.window_decorations = 'RESIZE'
+config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 
 
 -- 1.0 line height is too much
@@ -94,45 +51,33 @@ config.audible_bell = 'Disabled'
 
 
 -- config.font = wezterm.font('JetBrains Mono')
-config.font = wezterm.font('Maple Mono NF')
+config.font = wezterm.font('Maple Mono SC NF')
+
+config.window_frame = require('window-frame')
 
 
-config.window_frame = {
-  -- The font used in the tab bar.
-  -- Roboto Bold is the default; this font is bundled
-  -- with wezterm.
-  -- Whatever font is selected here, it will have the
-  -- main font setting appended to it to pick up any
-  -- fallback fonts you may have used there.
-  font = wezterm.font { family = 'Roboto', weight = 'Bold' },
-
-  -- The size of the font in the tab bar.
-  -- Default to 10.0 on Windows but 12.0 on other systems
-  font_size = 14,
-
-  -- The overall background color of the tab bar when
-  -- the window is focused
-  active_titlebar_bg = '#333333',
-
-  -- The overall background color of the tab bar when
-  -- the window is not focused
-  inactive_titlebar_bg = '#333333',
-}
-
-
-config.font_size = 14
-
-
+config.font_size = 12
 config.initial_rows = 30
 config.initial_cols = 100
 
 
-config.colors = {
-  tab_bar = {
-    -- The color of the inactive tab bar edge/divider
-    inactive_tab_edge = '#575757',
-  },
-}
+local function toggle_tab_bar(window, _)
+  local overrides = window:get_config_overrides() or {}
+
+  if overrides.enable_tab_bar == false then
+    overrides.enable_tab_bar = true
+  else
+    overrides.enable_tab_bar = false
+  end
+  window:set_config_overrides(overrides)
+end
+
+
+wezterm.on("toggle-tabbar", toggle_tab_bar)
+
+config.use_fancy_tab_bar = true
+
+config.colors = require('tab-bar')
 
 -- and finally, return the configuration to wezterm
 return config

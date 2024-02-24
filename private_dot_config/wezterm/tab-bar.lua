@@ -1,31 +1,41 @@
--- module
-local M = {}
+return {
+  tab_bar = {
+    -- The color of the strip that goes along the top of the window
+    -- (does not apply when fancy tab bar is in use)
+    background = '#2b2042',
 
-local wezterm = require('wezterm')
+    active_tab = {
+      bg_color = '#2b2042',
+      fg_color = '#c0c0c0',
+      intensity = 'Bold',
+      underline = 'Single',
+      italic = false,
+      strikethrough = false,
+    },
 
-local file_handler = require('json-handler')
+    -- Inactive tabs are the tabs that do not have focus
+    inactive_tab = {
+      bg_color = '#1b1032',
+      fg_color = '#808080',
+      underline = 'Single',
+    },
 
--- tab setting is used in settings.json
-local settings_file_path = wezterm.config_dir .. '/settings.json'
+    inactive_tab_hover = {
+      bg_color = '#3b3052',
+      fg_color = '#909090',
+      italic = true,
+    },
 
--- toggle function, this will toggle the value of tab_bar_enabled and
--- save settings to file
-local function toggle()
-  local settings = file_handler.read(settings_file_path)
+    -- The new tab button that let you create new tabs
+    new_tab = {
+      bg_color = '#1b1032',
+      fg_color = '#808080',
+    },
 
-  -- I personally find the ternary `x and y or z` confusing when booleans are
-  -- involved, so I prefer to check the nil-ness directly
-  local tab_bar_is_visible = settings.tab_bar_is_visible
-  if tab_bar_is_visible == nil then
-    tab_bar_is_visible = true -- This is the default
-  end
-
-  settings.tab_bar_is_visible = not tab_bar_is_visible
-  file_handler.write(settings, settings_file_path)
-end
-
-M.toggle = toggle
-
-M.enabled = file_handler.read(settings_file_path).tab_bar_is_visible
-
-return M
+    new_tab_hover = {
+      bg_color = '#3b3052',
+      fg_color = '#909090',
+      italic = true,
+    },
+  },
+}
