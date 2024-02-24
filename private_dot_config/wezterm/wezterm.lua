@@ -1,5 +1,5 @@
 -- Pull in the wezterm API
-local wezterm = require 'wezterm'
+local wezterm = require('wezterm')
 
 -- This table will hold the configuration.
 local config = {}
@@ -11,8 +11,8 @@ if wezterm.config_builder then
 end
 
 config.default_prog = {
-	"bash",
-	"--login"
+  "bash",
+  "--login"
 }
 
 
@@ -31,6 +31,11 @@ config.adjust_window_size_when_changing_font_size = false
 
 -- key bindings
 config.keys = {
+  {
+    key = 't',
+    mods = 'CTRL',
+    action = wezterm.action.EmitEvent('toggle-tabbar')
+  },
   {
     key = 'd',
     mods = 'ALT|SHIFT',
@@ -120,11 +125,21 @@ config.window_frame = {
 }
 
 
-config.font_size = 14
-
-
+config.font_size = 12
 config.initial_rows = 30
 config.initial_cols = 100
+
+
+wezterm.on("toggle-tabbar", function(window, _)
+  local overrides = window:get_config_overrides() or {}
+
+  if overrides.enable_tab_bar == false then
+    overrides.enable_tab_bar = true
+  else
+    overrides.enable_tab_bar = false
+  end
+  window:set_config_overrides(overrides)
+end)
 
 
 config.colors = {
