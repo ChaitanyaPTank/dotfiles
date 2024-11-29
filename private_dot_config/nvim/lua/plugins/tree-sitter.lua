@@ -7,6 +7,7 @@ return {
   end,
   config = function()
     local config = require('nvim-treesitter.configs')
+    ---@diagnostic disable-next-line: missing-fields
     config.setup({
       highlight = {
         enable = true,

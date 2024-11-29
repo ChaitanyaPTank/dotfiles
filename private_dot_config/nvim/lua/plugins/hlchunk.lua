@@ -1,7 +1,8 @@
 return {
   "shellRaining/hlchunk.nvim",
-  event = { "UIEnter" },
+  event = { "BufReadPre", "BufNewFile" },
   opts = {
-    blank = { enable = false }
+    chunk = { enable = true },
+    blank = { enable = false },
   }
 }

@@ -41,8 +41,8 @@ return {
     action = wezterm.action.ActivatePaneDirection('Next')
   },
   {
-    key = 'Z',
-    mods = 'CTRL | ALT',
+    key = '`',
+    mods = 'CTRL',
     action = wezterm.action.TogglePaneZoomState,
   },
   {

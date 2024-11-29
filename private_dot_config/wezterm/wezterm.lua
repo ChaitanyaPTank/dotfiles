@@ -35,7 +35,8 @@ config.keys = require('key-maps')
 
 -- config.color_scheme = 'Chalk'
 -- config.color_scheme = 'OneDark (base16)'
-config.color_scheme = 'Catppuccin Frappe'
+-- config.color_scheme = 'Catppuccin Frappe'
+config.color_scheme = 'Darcula (base16)'
 
 
 -- allow resize by mouse
@@ -50,13 +51,14 @@ config.line_height = 1
 config.audible_bell = 'Disabled'
 
 
--- config.font = wezterm.font('JetBrains Mono')
-config.font = wezterm.font('Maple Mono SC NF')
+config.font = wezterm.font('JetBrains Mono', { weight = 'Regular' })
+-- config.font = wezterm.font('Maple Mono NF', { weight = 'Regular' })
+-- config.font = wezterm.font('DM Mono', { weight = 'Regular' })
 
 config.window_frame = require('window-frame')
 
 
-config.font_size = 12
+config.font_size = 13
 config.initial_rows = 30
 config.initial_cols = 100
 

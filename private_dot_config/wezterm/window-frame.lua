@@ -1,5 +1,8 @@
 local wezterm = require 'wezterm'
 
+local BG_COLOR = "#3A3A3A"
+local BG_COLOR_ACTIVE = "#38393b"
+
 return {
   -- The font used in the tab bar.
   -- Roboto Bold is the default; this font is bundled
@@ -10,14 +13,13 @@ return {
   font = wezterm.font { family = 'Inter', weight = 'Regular' },
 
   -- The size of the font in the tab bar.
-  -- Default to 10.0 on Windows but 12.0 on other systems
-  font_size = 14,
+  font_size = 16,
 
   -- The overall background color of the tab bar when
   -- the window is focused
-  active_titlebar_bg = '#292c3c',
+  active_titlebar_bg = BG_COLOR,
 
   -- The overall background color of the tab bar when
   -- the window is not focused
-  inactive_titlebar_bg = '#0b0022',
+  inactive_titlebar_bg = BG_COLOR_ACTIVE,
 }

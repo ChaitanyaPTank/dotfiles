@@ -17,6 +17,6 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup("plugins")
-
 require('chaitanya')
+
+require('lazy').setup("plugins")

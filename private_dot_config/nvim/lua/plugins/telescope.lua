@@ -1,10 +1,12 @@
 return {
   'nvim-telescope/telescope.nvim',
-  tag = '0.1.6',
+  branch = '0.1.x',
   dependencies = { 'nvim-lua/plenary.nvim' },
   config = function()
     -- change keymaps
     local builtin = require('telescope.builtin')
+    local telescope = require('telescope')
+    local actions = require('telescope.actions')
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "TelescopeResults",
@@ -47,13 +49,17 @@ return {
     vim.keymap.set('n', '<leader>h', builtin.help_tags, {})
     vim.keymap.set('n', '<leader>o', builtin.lsp_document_symbols, {})
 
-    local telescope = require('telescope')
 
     -- ignore node modules and other stuff
     telescope.setup({
       defaults = {
         file_ignore_patterns = { "node_modules" },
-        preview = false
+        preview = false,
+        mappings = {
+          i = {
+            ['<Esc>'] = actions.close -- close on Esc when in insert mode
+          }
+        }
       },
       pickers = {
         find_files = {
@@ -62,16 +68,24 @@ return {
         },
         buffers = {
           theme = "dropdown",
-          -- path_display = filenameFirst
+          path_display = filenameFirst,
+          mappings = {
+            i = {
+              ["<C-d>"] = actions.delete_buffer,
+            },
+            n = {
+              ["<C-d>"] = actions.delete_buffer,
+            }
+          },
         },
         git_files = {
           theme = "dropdown",
-          -- path_display = filenameFirst
+          path_display = filenameFirst
         },
         live_grep = {
           mirror = true,
           preview = true,
-          -- path_display = filenameFirst
+          path_display = filenameFirst
         },
         lsp_document_symbols = {
           theme = "dropdown",
