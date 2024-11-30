@@ -51,8 +51,8 @@ config.line_height = 1
 config.audible_bell = 'Disabled'
 
 
-config.font = wezterm.font('JetBrains Mono', { weight = 'Regular' })
--- config.font = wezterm.font('Maple Mono NF', { weight = 'Regular' })
+-- config.font = wezterm.font('JetBrains Mono', { weight = 'Regular' })
+config.font = wezterm.font('Maple Mono NF', { weight = 'Regular' })
 -- config.font = wezterm.font('DM Mono', { weight = 'Regular' })
 
 config.window_frame = require('window-frame')
