@@ -18,12 +18,11 @@ config.default_prog = {
 
 -- we don't want paddings
 config.window_padding = {
-  left = 0,
-  right = 0,
-  top = 0,
-  bottom = 0
+  left = '8px',
+  right = '8px',
+  top = '8px',
+  bottom = '8px'
 }
-
 
 -- avoid changing window resize when you change font size
 config.adjust_window_size_when_changing_font_size = false
@@ -44,21 +43,22 @@ config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 
 
 -- 1.0 line height is too much
-config.line_height = 1
+config.line_height = 1.2
 
 
 -- no audible bell
 config.audible_bell = 'Disabled'
 
 
+config.font = wezterm.font('Rec Mono Semicasual', { weight = 'Regular' })
 -- config.font = wezterm.font('JetBrains Mono', { weight = 'Regular' })
-config.font = wezterm.font('Maple Mono NF', { weight = 'Regular' })
+-- config.font = wezterm.font('Maple Mono NF', { weight = 'Regular' })
 -- config.font = wezterm.font('DM Mono', { weight = 'Regular' })
 
 config.window_frame = require('window-frame')
 
 
-config.font_size = 13
+config.font_size = 14
 config.initial_rows = 30
 config.initial_cols = 100
 

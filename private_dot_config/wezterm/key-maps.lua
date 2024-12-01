@@ -50,4 +50,12 @@ return {
     mods = 'CTRL|SHIFT',
     action = wezterm.action.ActivateCommandPalette,
   },
+  {
+    key = ' ',
+    mods = 'CTRL',
+    action = wezterm.action.SendKey({
+      key = ' ',
+      mods = 'CTRL',
+    }),
+  }
 }

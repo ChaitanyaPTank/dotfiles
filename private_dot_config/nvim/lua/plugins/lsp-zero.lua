@@ -35,7 +35,7 @@ return {
       ['<Up>'] = cmp.mapping.select_prev_item(cmp_select),
       ['<Down>'] = cmp.mapping.select_next_item(cmp_select),
       ['<CR>'] = cmp.mapping.confirm(cmp_select),
-      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-Space>'] = cmp.mapping.complete({ 'i', 's' }),
       ['<Tab>'] = cmp.mapping(function(fallback)
         local col = vim.fn.col('.') - 1
         if cmp.visible() then
@@ -49,6 +49,8 @@ return {
 
       -- Go to previous item
       ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
+
+      -- Snippet jump forward
       ['<C-k>'] = cmp.mapping(function()
         local luasnip = require('luasnip')
         if luasnip.expand_or_locally_jumpable() then
@@ -56,6 +58,8 @@ return {
           luasnip.expand_or_jump()
         end
       end, { 'i', 's' }),
+
+      -- snippet jump backward
       ['<C-j>'] = cmp.mapping(function(fallback)
         local luasnip = require('luasnip')
         if luasnip.locally_jumpable(1) then
@@ -63,7 +67,9 @@ return {
         else
           fallback()
         end
-      end, { 'i', 's' })
+      end, { 'i', 's' }),
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
     })
 
     cmp.setup({
@@ -92,13 +98,14 @@ return {
         fields = { 'kind', 'abbr', 'menu' },
         format = require('lspkind').cmp_format({
           mode = 'symbol',
-          maxwidth = 10,
-          ellipsis_char = '...'
+          maxwidth = 20,
+          ellipsis_char = '...',
         }),
         expandable_indicator = true
       }
     })
 
+    ---@diagnostic disable-next-line: unused-local
     lsp_zero.on_attach(function(client, bufnr)
       lsp_zero.default_keymaps({ buffer = bufnr })
 
