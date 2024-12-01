@@ -6,15 +6,15 @@ local options = {
 -- Keymaps defined here
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', options)
 
+vim.keymap.set('n', '<C-x>', ':bd%<CR>', options)
 
-vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', options)
+
+-- vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', options)
 
 -- key mappings
 vim.keymap.set('n', '<leader>n', ':bn<CR>')
 vim.keymap.set('n', '<leader>p', ':bprev<CR>')
 
-
-vim.keymap.set('n', '<Bslash>t', ':ToggleTerm<CR>')
-vim.keymap.set('t', '<Bslash>t', '<C-\\><C-n>:ToggleTerm<CR>')
-
-vim.keymap.set('n', 'cie', 'ggVGd')
+vim.cmd [[ onoremap <silent> ie :<C-u>normal! gg0VG<CR> ]]
+vim.cmd [[ vnoremap <silent> ie :<C-u>normal! gg0VG<CR> ]]
+vim.cmd [[ xnoremap <silent> ie :<C-u>normal! gg0VG<CR> ]]

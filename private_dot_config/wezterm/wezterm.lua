@@ -18,119 +18,52 @@ config.default_prog = {
 
 -- we don't want paddings
 config.window_padding = {
-  left = 0,
-  right = 0,
-  top = 0,
-  bottom = 0
+  left = '8px',
+  right = '8px',
+  top = '8px',
+  bottom = '8px'
 }
-
 
 -- avoid changing window resize when you change font size
 config.adjust_window_size_when_changing_font_size = false
 
 
 -- key bindings
-config.keys = {
-  {
-    key = 't',
-    mods = 'CTRL',
-    action = wezterm.action.EmitEvent('toggle-tabbar')
-  },
-  {
-    key = 'd',
-    mods = 'ALT|SHIFT',
-    action = wezterm.action.SplitVertical({ domain = 'CurrentPaneDomain' }),
-  },
-  {
-    key = 'd',
-    mods = 'CTRL|SHIFT',
-    action = wezterm.action.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
-  },
-  {
-    key = 'F11',
-    action = wezterm.action.ToggleFullScreen,
-  },
-  {
-    key = 'r',
-    mods = 'CMD|SHIFT',
-    action = wezterm.action.ReloadConfiguration,
-  },
-  {
-    key = 'w',
-    mods = 'CTRL|SHIFT',
-    action = wezterm.action.CloseCurrentTab({ confirm = false })
-  },
-  {
-    key = 'LeftArrow',
-    mods = 'ALT',
-    action = wezterm.action.ActivatePaneDirection('Prev')
-  },
-  {
-    key = 'RightArrow',
-    mods = 'ALT',
-    action = wezterm.action.ActivatePaneDirection('Next')
-  },
-  {
-    key = 'Z',
-    mods = 'SHIFT',
-    action = wezterm.action.TogglePaneZoomState,
-  },
-  {
-    key = 'P',
-    mods = 'CTRL|SHIFT',
-    action = wezterm.action.ActivateCommandPalette,
-  },
-}
+config.keys = require('key-maps')
 
 
-config.color_scheme = 'Chalk'
+-- config.color_scheme = 'Chalk'
+-- config.color_scheme = 'OneDark (base16)'
+-- config.color_scheme = 'Catppuccin Frappe'
+config.color_scheme = 'Darcula (base16)'
 
 
 -- allow resize by mouse
-config.window_decorations = 'RESIZE'
+config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 
 
 -- 1.0 line height is too much
-config.line_height = 1
+config.line_height = 1.2
 
 
 -- no audible bell
 config.audible_bell = 'Disabled'
 
 
--- config.font = wezterm.font('JetBrains Mono')
-config.font = wezterm.font('Maple Mono NF')
+config.font = wezterm.font('Rec Mono Semicasual', { weight = 'Regular' })
+-- config.font = wezterm.font('JetBrains Mono', { weight = 'Regular' })
+-- config.font = wezterm.font('Maple Mono NF', { weight = 'Regular' })
+-- config.font = wezterm.font('DM Mono', { weight = 'Regular' })
+
+config.window_frame = require('window-frame')
 
 
-config.window_frame = {
-  -- The font used in the tab bar.
-  -- Roboto Bold is the default; this font is bundled
-  -- with wezterm.
-  -- Whatever font is selected here, it will have the
-  -- main font setting appended to it to pick up any
-  -- fallback fonts you may have used there.
-  font = wezterm.font { family = 'Roboto', weight = 'Bold' },
-
-  -- The size of the font in the tab bar.
-  -- Default to 10.0 on Windows but 12.0 on other systems
-  font_size = 14,
-
-  -- The overall background color of the tab bar when
-  -- the window is focused
-  active_titlebar_bg = '#333333',
-
-  -- The overall background color of the tab bar when
-  -- the window is not focused
-  inactive_titlebar_bg = '#333333',
-}
-
-
-config.font_size = 12
+config.font_size = 14
 config.initial_rows = 30
 config.initial_cols = 100
 
 
-wezterm.on("toggle-tabbar", function(window, _)
+local function toggle_tab_bar(window, _)
   local overrides = window:get_config_overrides() or {}
 
   if overrides.enable_tab_bar == false then
@@ -139,15 +72,14 @@ wezterm.on("toggle-tabbar", function(window, _)
     overrides.enable_tab_bar = false
   end
   window:set_config_overrides(overrides)
-end)
+end
 
 
-config.colors = {
-  tab_bar = {
-    -- The color of the inactive tab bar edge/divider
-    inactive_tab_edge = '#575757',
-  },
-}
+wezterm.on("toggle-tabbar", toggle_tab_bar)
+
+config.use_fancy_tab_bar = true
+
+config.colors = require('tab-bar')
 
 -- and finally, return the configuration to wezterm
 return config

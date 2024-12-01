@@ -15,6 +15,14 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 
+local os = vim.loop.os_uname().sysname:lower()
+local is_windows = os:find('windows')
+
+if is_windows then
+  vim.opt.shellcmdflag = "-s"
+end
+
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('highlight_yank', {}),
   desc = 'Hightlight selection on yank',
