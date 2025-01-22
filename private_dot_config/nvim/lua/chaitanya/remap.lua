@@ -15,6 +15,6 @@ vim.keymap.set('n', '<C-x>', ':bd%<CR>', options)
 vim.keymap.set('n', '<leader>n', ':bn<CR>')
 vim.keymap.set('n', '<leader>p', ':bprev<CR>')
 
-vim.cmd [[ onoremap <silent> ie :<C-u>normal! gg0VG<CR> ]]
-vim.cmd [[ vnoremap <silent> ie :<C-u>normal! gg0VG<CR> ]]
-vim.cmd [[ xnoremap <silent> ie :<C-u>normal! gg0VG<CR> ]]
+vim.cmd [[ onoremap <silent> ie :normal! gg0VG<CR> ]]
+vim.cmd [[ vnoremap <silent> ie :normal! gg0VG<CR> ]]
+vim.cmd [[ xnoremap <silent> ie :normal! gg0VG<CR> ]]

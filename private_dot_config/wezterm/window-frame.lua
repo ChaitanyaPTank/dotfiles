@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 
 local BG_COLOR = "#3A3A3A"
-local BG_COLOR_ACTIVE = "#38393b"
+local BG_COLOR_ACTIVE = "#38393B"
 
 return {
   -- The font used in the tab bar.

@@ -43,14 +43,14 @@ config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 
 
 -- 1.0 line height is too much
-config.line_height = 1.2
+-- config.line_height = 1.2
 
 
 -- no audible bell
 config.audible_bell = 'Disabled'
 
 
-config.font = wezterm.font('Rec Mono Semicasual', { weight = 'Regular' })
+-- config.font = wezterm.font('Rec Mono Semicasual', { weight = 'Regular' })
 -- config.font = wezterm.font('JetBrains Mono', { weight = 'Regular' })
 -- config.font = wezterm.font('Maple Mono NF', { weight = 'Regular' })
 -- config.font = wezterm.font('DM Mono', { weight = 'Regular' })
@@ -59,7 +59,7 @@ config.window_frame = require('window-frame')
 
 
 config.font_size = 14
-config.initial_rows = 30
+config.initial_rows = 24
 config.initial_cols = 100
 
 
@@ -80,6 +80,15 @@ wezterm.on("toggle-tabbar", toggle_tab_bar)
 config.use_fancy_tab_bar = true
 
 config.colors = require('tab-bar')
+
+config.background = {
+  {
+    source = {
+      File = wezterm.config_dir .. "/2023_07_10_5456.jpeg",
+    },
+    hsb = { brightness = 0.04 }
+  }
+}
 
 -- and finally, return the configuration to wezterm
 return config

@@ -28,82 +28,81 @@ return {
       info = '»'
     })
 
-    local cmp = require('cmp')
-
-    local cmp_select = { behavior = cmp.SelectBehavior.Select }
-    local cmp_mappings = cmp.mapping.preset.insert({
-      ['<Up>'] = cmp.mapping.select_prev_item(cmp_select),
-      ['<Down>'] = cmp.mapping.select_next_item(cmp_select),
-      ['<CR>'] = cmp.mapping.confirm(cmp_select),
-      ['<C-Space>'] = cmp.mapping.complete({ 'i', 's' }),
-      ['<Tab>'] = cmp.mapping(function(fallback)
-        local col = vim.fn.col('.') - 1
-        if cmp.visible() then
-          cmp.select_next_item(cmp_select)
-        elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-          fallback()
-        else
-          cmp.complete()
-        end
-      end, { 'i', 's' }),
-
-      -- Go to previous item
-      ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
-
-      -- Snippet jump forward
-      ['<C-k>'] = cmp.mapping(function()
-        local luasnip = require('luasnip')
-        if luasnip.expand_or_locally_jumpable() then
-          print("expandable")
-          luasnip.expand_or_jump()
-        end
-      end, { 'i', 's' }),
-
-      -- snippet jump backward
-      ['<C-j>'] = cmp.mapping(function(fallback)
-        local luasnip = require('luasnip')
-        if luasnip.locally_jumpable(1) then
-          luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end, { 'i', 's' }),
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    })
-
-    cmp.setup({
-      sources = {
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "buffer" },
-      },
-      snippet = {
-        expand = function(args)
-          -- vim.snippet.expand(args.body)
-          require('luasnip').lsp_expand(args.body)
-        end
-      },
-      preselect = 'item',
-      completion = {
-        completeopt = 'menu,menuone,preview',
-        side_padding = 1
-      },
-      mapping = cmp_mappings,
-      window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
-      },
-      formatting = {
-        fields = { 'kind', 'abbr', 'menu' },
-        format = require('lspkind').cmp_format({
-          mode = 'symbol',
-          maxwidth = 20,
-          ellipsis_char = '...',
-        }),
-        expandable_indicator = true
-      }
-    })
+    -- local cmp = require('cmp')
+    --
+    -- local cmp_select = { behavior = cmp.SelectBehavior.Select }
+    -- local cmp_mappings = cmp.mapping.preset.insert({
+    --   ['<Up>'] = cmp.mapping.select_prev_item(cmp_select),
+    --   ['<Down>'] = cmp.mapping.select_next_item(cmp_select),
+    --   ['<CR>'] = cmp.mapping.confirm(cmp_select),
+    --   ['<C-Space>'] = cmp.mapping.complete({ 'i', 's' }),
+    --   ['<Tab>'] = cmp.mapping(function(fallback)
+    --     local col = vim.fn.col('.') - 1
+    --     if cmp.visible() then
+    --       cmp.select_next_item(cmp_select)
+    --     elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+    --       fallback()
+    --     else
+    --       cmp.complete()
+    --     end
+    --   end, { 'i', 's' }),
+    --
+    --   -- Go to previous item
+    --   ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
+    --
+    --   -- Snippet jump forward
+    --   ['<C-k>'] = cmp.mapping(function()
+    --     local luasnip = require('luasnip')
+    --     if luasnip.expand_or_locally_jumpable() then
+    --       luasnip.expand_or_jump()
+    --     end
+    --   end, { 'i', 's' }),
+    --
+    --   -- snippet jump backward
+    --   ['<C-j>'] = cmp.mapping(function(fallback)
+    --     local luasnip = require('luasnip')
+    --     if luasnip.locally_jumpable(1) then
+    --       luasnip.jump(-1)
+    --     else
+    --       fallback()
+    --     end
+    --   end, { 'i', 's' }),
+    --   ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    --   ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    -- })
+    --
+    -- cmp.setup({
+    --   sources = {
+    --     { name = "nvim_lsp" },
+    --     { name = "luasnip" },
+    --     { name = "buffer" },
+    --   },
+    --   snippet = {
+    --     expand = function(args)
+    --       -- vim.snippet.expand(args.body)
+    --       require('luasnip').lsp_expand(args.body)
+    --     end
+    --   },
+    --   preselect = 'item',
+    --   completion = {
+    --     completeopt = 'menu,menuone,preview',
+    --     side_padding = 1
+    --   },
+    --   mapping = cmp_mappings,
+    --   window = {
+    --     completion = cmp.config.window.bordered(),
+    --     documentation = cmp.config.window.bordered(),
+    --   },
+    --   formatting = {
+    --     fields = { 'kind', 'abbr', 'menu' },
+    --     format = require('lspkind').cmp_format({
+    --       mode = 'symbol',
+    --       maxwidth = 20,
+    --       ellipsis_char = '...',
+    --     }),
+    --     expandable_indicator = true
+    --   }
+    -- })
 
     ---@diagnostic disable-next-line: unused-local
     lsp_zero.on_attach(function(client, bufnr)
@@ -117,7 +116,7 @@ return {
       vim.keymap.set("n", "<leader>d", function() vim.diagnostic.open_float() end, opts)
       vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
       vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
-      vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
+      vim.keymap.set("n", "<leader>a", function() vim.lsp.buf.code_action() end, opts)
       vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
       vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
       vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
@@ -160,7 +159,9 @@ return {
             }
           }
         })
-      end
+      end,
+
+      -- ['rust_analyzer'] = function() end
 
     })
   end

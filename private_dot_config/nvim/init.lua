@@ -20,3 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 require('chaitanya')
 
 require('lazy').setup("plugins")
+
+vim.cmd("colorscheme darcula-solid")
+vim.cmd("colorscheme cyberdream")
+-- vim.cmd("colorscheme catppuccin-mocha")

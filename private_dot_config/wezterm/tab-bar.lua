@@ -1,7 +1,7 @@
 local BG_COLOR = "#1A1A1A"
 local FG_COLOR = "#808080"
 local FG_COLOR_ACTIVE = "#FAFAFA"
-local BG_COLOR_ACTIVE = "#38393b"
+local BG_COLOR_ACTIVE = "#38393B"
 
 return {
   tab_bar = {
