@@ -1,22 +1,25 @@
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.termguicolors = true
-vim.opt.ignorecase = true
-vim.opt.hlsearch = false
-vim.opt.colorcolumn = "80"
-vim.opt.expandtab = true
-vim.opt.cursorline = true
-vim.opt.wrap = false
-vim.opt.scrolloff = 2
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.termguicolors = true
+vim.o.ignorecase = true
+vim.o.hlsearch = false
+vim.o.colorcolumn = "80"
+vim.o.expandtab = true
+vim.o.cursorline = true
+vim.o.wrap = false
+vim.o.scrolloff = 2
+vim.o.foldcolumn = "auto"
+vim.o.foldlevel = 100
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
 
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-
-local os = vim.loop.os_uname().sysname:lower()
+local os = vim.uv.os_uname().sysname:lower()
 local is_windows = os:find('windows')
 
 if is_windows then

@@ -2,11 +2,12 @@ return {
   'saghen/blink.cmp',
   -- optional: provides snippets for the snippet source
   dependencies = { 'rafamadriz/friendly-snippets' },
-  version = 'v0.*',
+  version = 'v1.*',
 
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+    fuzzy = { implementation = 'prefer_rust_with_warning' },
     snippets = {
       preset = 'luasnip',
       expand = function(snippet) require('luasnip').lsp_expand(snippet) end,
@@ -29,6 +30,8 @@ return {
       ['<Down>'] = { 'select_next', 'fallback' },
       ['<Tab>'] = { 'select_next', 'fallback' },
       ['<CR>'] = { 'accept', 'fallback' },
+      ['<C-b>'] = { 'scroll_documentation_down', 'fallback' },
+      ['<C-f>'] = { 'scroll_documentation_up', 'fallback' },
       ['<C-k>'] = {
         ---@diagnostic disable-next-line: unused-local
         function(_cmp)
@@ -52,17 +55,30 @@ return {
       nerd_font_variant = 'mono'
     },
 
-
+    -- optionally disable cmdline completions
+    cmdline = {
+      enabled = false
+    },
 
     -- default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { 'lsp', 'buffer', 'snippets', 'path' },
-      -- optionally disable cmdline completions
-      cmdline = {},
+      default = { 'lazydev', 'lsp', 'snippets', 'buffer', 'path' },
+      providers = {
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          -- make lazydev completions top priority (see `:h blink.cmp`)
+          score_offset = 100,
+        },
+      }
     },
 
     completion = {
+      documentation = {
+        auto_show = true,
+        window = { border = 'rounded' }
+      },
       menu = {
         border = 'rounded',
         draw = {
@@ -72,7 +88,7 @@ return {
               ellipsis = false,
               text = function(ctx)
                 local kind_icon = require('lspkind').presets.codicons[ctx.kind]
-                return kind_icon .. " "
+                return (kind_icon or "_") .. " "
               end,
             }
           },
@@ -83,11 +99,11 @@ return {
           }
         }
       }
-    }
+    },
     -- experimental signature help support
-    -- signature = { enabled = true }
+    signature = { enabled = true, window = { border = 'rounded' } }
   },
   -- allows extending the providers array elsewhere in your config
   -- without having to redefine it
-  opts_extend = { "sources.default" }
+  -- opts_extend = { "sources.default" }
 }
