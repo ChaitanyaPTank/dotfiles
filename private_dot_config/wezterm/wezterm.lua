@@ -45,14 +45,17 @@ config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 
 
 -- 1.0 line height is too much
--- config.line_height = 1.2
+config.line_height = 1.2
 
 
 -- no audible bell
 config.audible_bell = 'Disabled'
 
 
--- config.font = wezterm.font('Rec Mono Semicasual', { weight = 'Regular' })
+config.font = wezterm.font_with_fallback({
+  { family = "Rec Mono Semicasual", weight = 'Regular' },
+  { family = "JetBrains Mono NF" }
+})
 -- config.font = wezterm.font('JetBrains Mono', { weight = 'Regular' })
 -- config.font = wezterm.font('Maple Mono NF', { weight = 'Regular' })
 -- config.font = wezterm.font('DM Mono', { weight = 'Regular' })
