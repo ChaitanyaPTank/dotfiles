@@ -6,9 +6,27 @@ return {
     "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
     "MunifTanjim/nui.nvim",
   },
-  config = function()
-    require("neo-tree").setup({ })
-    vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { noremap = true })
-    vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { noremap = true })
-  end,
+  config = true,
+  keys = {
+    {
+      "<leader>e",
+      ":Neotree toggle reveal<CR>",
+      desc = "Neotree with current buffer focused"
+    },
+    {
+      "<Bslash>e",
+      ":Neotree toggle reveal<CR>",
+      desc = "Neotree with current buffer focused"
+    },
+    {
+      "<Bslash>g",
+      ":Neotree source=git_status toggle reveal<CR>",
+      desc = "Neotree with git files"
+    },
+    {
+      "<Bslash>b",
+      ":Neotree source=buffers toggle<CR>",
+      desc = "Neotree with open buffers"
+    }
+  }
 }

@@ -15,6 +15,8 @@ config.default_prog = {
   "--login"
 }
 
+-- config.webgpu_preferred_adapter = wezterm.gui.enumerate_gpus()[1]
+-- config.front_end = "WebGpu"
 
 -- we don't want paddings
 config.window_padding = {

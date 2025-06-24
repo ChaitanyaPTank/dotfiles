@@ -14,6 +14,7 @@ vim.o.foldcolumn = "auto"
 vim.o.foldlevel = 100
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+vim.o.sessionoptions = "buffers,folds,tabpages,terminal"
 
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
@@ -26,6 +27,7 @@ if is_windows then
   vim.opt.shellcmdflag = "-s"
 end
 
+vim.diagnostic.config({ virtual_text = false, float = { border = 'rounded' } })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('highlight_yank', {}),
