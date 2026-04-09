@@ -12,10 +12,17 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
-config.default_prog = {
-  "zsh",
-  "--login"
-}
+if wezterm.target_triple:find("window") then
+  config.default_prog = {
+    "bash",
+    "--login"
+  }
+else
+  config.default_prog = {
+    "zsh",
+    "--login"
+  }
+end
 
 -- config.webgpu_preferred_adapter = wezterm.gui.enumerate_gpus()[1]
 config.front_end = "WebGpu"
