@@ -10,7 +10,10 @@ return {
   -- Whatever font is selected here, it will have the
   -- main font setting appended to it to pick up any
   -- fallback fonts you may have used there.
-  font = wezterm.font { family = 'Inter', weight = 'Regular' },
+  font = wezterm.font_with_fallback({
+    { family = 'Inter',     weight = 'Regular' },
+    { family = 'Helvetica', weight = 'Regular' },
+  }),
 
   -- The size of the font in the tab bar.
   font_size = 16,

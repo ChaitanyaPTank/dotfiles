@@ -73,7 +73,7 @@ return {
           }
         })
       end,
-      desc = "Smart Find Files"
+      desc = "Find Buffer"
     },
     {
       "fg",
@@ -86,6 +86,12 @@ return {
       "<leader>o",
       function()
         Snacks.picker.lsp_symbols()
+      end
+    },
+    {
+      "<BSlash>o",
+      function()
+        Snacks.picker.lsp_workspace_symbols()
       end
     },
     {

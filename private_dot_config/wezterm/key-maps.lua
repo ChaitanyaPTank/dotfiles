@@ -7,13 +7,13 @@ return {
     action = wezterm.action.EmitEvent('toggle-tabbar')
   },
   {
-    key = 'd',
+    key = 'v',
     mods = 'ALT|SHIFT',
     action = wezterm.action.SplitVertical({ domain = 'CurrentPaneDomain' }),
   },
   {
-    key = 'd',
-    mods = 'CTRL|SHIFT',
+    key = 'h',
+    mods = 'ALT|SHIFT',
     action = wezterm.action.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
   },
   {
@@ -43,6 +43,11 @@ return {
   {
     key = '`',
     mods = 'CTRL',
+    action = wezterm.action.TogglePaneZoomState,
+  },
+  {
+    key = 'z',
+    mods = 'ALT',
     action = wezterm.action.TogglePaneZoomState,
   },
   {

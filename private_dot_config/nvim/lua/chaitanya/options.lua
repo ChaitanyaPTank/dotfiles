@@ -11,10 +11,12 @@ vim.o.cursorline = true
 vim.o.wrap = false
 vim.o.scrolloff = 2
 vim.o.foldcolumn = "auto"
+vim.o.signcolumn = "yes:1"
 vim.o.foldlevel = 100
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
 vim.o.sessionoptions = "buffers,folds,tabpages,terminal"
+vim.o.undofile = true
 
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1

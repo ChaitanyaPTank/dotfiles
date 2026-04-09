@@ -4,6 +4,8 @@ local wezterm = require('wezterm')
 -- This table will hold the configuration.
 local config = {}
 
+config.term = "wezterm"
+
 -- In newer versions of wezterm, use the config_builder which will
 -- help provide clearer error messages
 if wezterm.config_builder then
@@ -11,12 +13,12 @@ if wezterm.config_builder then
 end
 
 config.default_prog = {
-  "bash",
+  "zsh",
   "--login"
 }
 
 -- config.webgpu_preferred_adapter = wezterm.gui.enumerate_gpus()[1]
--- config.front_end = "WebGpu"
+config.front_end = "WebGpu"
 
 -- we don't want paddings
 config.window_padding = {
@@ -53,8 +55,7 @@ config.audible_bell = 'Disabled'
 
 
 config.font = wezterm.font_with_fallback({
-  { family = "Rec Mono Semicasual", weight = 'Regular' },
-  { family = "JetBrains Mono NF" }
+  { family = "Rec Mono Linear", weight = 'Regular' },
 })
 -- config.font = wezterm.font('JetBrains Mono', { weight = 'Regular' })
 -- config.font = wezterm.font('Maple Mono NF', { weight = 'Regular' })
@@ -63,7 +64,7 @@ config.font = wezterm.font_with_fallback({
 config.window_frame = require('window-frame')
 
 
-config.font_size = 14
+config.font_size = 16
 config.initial_rows = 24
 config.initial_cols = 100
 

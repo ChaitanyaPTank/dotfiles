@@ -21,9 +21,8 @@ require('chaitanya')
 
 require('lazy').setup("plugins")
 
-vim.diagnostic.config({ virtual_text = true })
-
 vim.diagnostic.config({
+  virtual_text = true,
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = '',
@@ -45,3 +44,9 @@ require('mason-lspconfig').setup({
 })
 
 require('luasnip.loaders.from_vscode').lazy_load()
+
+vim.filetype.add({
+  filename = {
+    ['.tmpl'] = "gohtmltmpl"
+  }
+})
