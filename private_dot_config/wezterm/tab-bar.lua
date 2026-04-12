@@ -13,7 +13,7 @@ return {
       bg_color = BG_COLOR_ACTIVE,
       fg_color = FG_COLOR_ACTIVE,
       intensity = 'Bold',
-      underline = 'Single',
+      underline = 'None',
       italic = false,
       strikethrough = false,
     },
@@ -22,7 +22,7 @@ return {
     inactive_tab = {
       bg_color = BG_COLOR,
       fg_color = FG_COLOR,
-      underline = 'Single',
+      underline = 'None',
     },
 
     inactive_tab_hover = {
