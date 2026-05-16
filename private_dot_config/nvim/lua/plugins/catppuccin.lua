@@ -1,11 +1,19 @@
 return {
-  "catppuccin/nvim",
-  name = "catppuccin",
-  priority = 1000,
-  opts = {
-    transparent_background = true
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
   },
-  config = function()
-    -- vim.cmd.colorscheme("catppuccin-frappe")
-  end
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    opts = {
+      transparent_background = true
+    },
+    config = function()
+      -- vim.cmd.colorscheme("catppuccin-frappe")
+    end
+  }
 }

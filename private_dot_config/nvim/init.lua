@@ -33,9 +33,7 @@ vim.diagnostic.config({
   },
 })
 
--- vim.cmd("colorscheme darcula-solid")
 vim.cmd("colorscheme cyberdream")
--- vim.cmd("colorscheme catppuccin-mocha")
 
 require('mason').setup()
 require('mason-lspconfig').setup({
@@ -44,6 +42,8 @@ require('mason-lspconfig').setup({
 })
 
 require('luasnip.loaders.from_vscode').lazy_load()
+
+require('vim._core.ui2').enable({ enable = true })
 
 vim.filetype.add({
   filename = {

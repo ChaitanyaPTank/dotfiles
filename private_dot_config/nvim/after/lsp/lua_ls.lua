@@ -1,3 +1,4 @@
+require('lspconfig.configs.lua_ls')
 return {
   settings = {
     Lua = {
