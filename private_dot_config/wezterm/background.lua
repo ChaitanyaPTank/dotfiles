@@ -1,7 +1,8 @@
 local wezterm = require('wezterm')
 local M = {}
 
-local bg_image_enabled = false
+local bg_image_enabled = true
+
 function M.apply_to_config(config)
   local background_image = {
     {
@@ -12,6 +13,8 @@ function M.apply_to_config(config)
     }
   }
 
+  config.background = background_image
+
   local function toogle_background_image(window)
     bg_image_enabled = not bg_image_enabled
     local bg = bg_image_enabled and background_image or {}
@@ -19,8 +22,6 @@ function M.apply_to_config(config)
     overrides.background = bg
     window:set_config_overrides(overrides)
   end
-
-  config.background = background_image
 
   wezterm.on('toggle-bg-image', toogle_background_image)
 end
