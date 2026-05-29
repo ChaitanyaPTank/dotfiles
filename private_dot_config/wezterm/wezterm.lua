@@ -5,7 +5,7 @@ local utils = require('utils')
 
 config.term = "wezterm"
 
-if utils.is_apple() then
+if utils.is_apple() or utils.is_linux() then
   config.default_prog = { "zsh", "--login" }
 else
   config.default_prog = { "bash", "--login" }
