@@ -1,13 +1,14 @@
 -- Pull in the wezterm API
 local wezterm = require('wezterm')
 local config = wezterm.config_builder()
+local utils = require('utils')
 
 config.term = "wezterm"
 
-if wezterm.target_triple:find("window") then
-  config.default_prog = { "bash", "--login" }
-else
+if utils.is_apple() then
   config.default_prog = { "zsh", "--login" }
+else
+  config.default_prog = { "bash", "--login" }
 end
 
 config.front_end = "WebGpu"

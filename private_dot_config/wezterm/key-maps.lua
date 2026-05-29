@@ -3,7 +3,7 @@ local wezterm = require 'wezterm'
 local M = {}
 
 function M.apply_to_config(config)
-  config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
+  config.leader = { key = 'a', mods = 'ALT', timeout_milliseconds = 1000 }
   config.keys = {
     {
       key = 't',
@@ -82,10 +82,15 @@ function M.apply_to_config(config)
     {
       key = '9',
       mods = 'ALT',
-      action = wezterm.action.ShowLauncherArgs {
+      action = wezterm.action.ShowLauncherArgs({
         flags = 'FUZZY|WORKSPACES',
-      },
+      }),
     },
+    {
+      key = 'f',
+      mods = 'LEADER',
+      action = wezterm.action.EmitEvent('change-font')
+    }
   }
 end
 
