@@ -21,12 +21,12 @@ local jetbrains_font_config = {
 
 wezterm.on('change-font', function(window, _)
   local current_font = window:effective_config().font
-  local overrides = window:get_config_overrides()
+  local overrides = window:get_config_overrides() or {}
   for _, cfg in ipairs(current_font.font) do
     local rec_mono = cfg.family:find('Rec Mono Linear')
     if rec_mono then
       overrides.font = wezterm.font_with_fallback(jetbrains_font_config)
-      overrides.line_height = 1
+      overrides.line_height = 1.1
       break
     else
       overrides.font = wezterm.font_with_fallback(recursive_font_config)
