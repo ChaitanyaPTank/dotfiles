@@ -22,9 +22,8 @@ if [[ -e .nvmrc ]]; then
   nvm use > /dev/null
 fi
 
-export PATH=/home/agilelpt56/.local/bin:$PATH
-
-
+export PATH="$HOME/bin":$PATH
+export PATH="$HOME/go/bin/":$PATH
 
 # shell completions
 if type ng &> /dev/null; then
@@ -48,3 +47,16 @@ if type starship &>/dev/null; then
   eval "$(starship init zsh)"
 fi
 
+if type zoxide &>/dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# pnpm
+export PNPM_HOME="/Users/chaitanyaptank/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

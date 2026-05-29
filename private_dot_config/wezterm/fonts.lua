@@ -1,14 +1,16 @@
 local wezterm = require('wezterm')
+local utils = require('utils')
+
 local M = {}
 
 local common_family = {
-  { family = "Symbols Nerd Font Mono" },
+  { family = 'Symbols Nerd Font Mono' },
   { family = 'Noto Sans Symbols 2' },
   { family = 'DejaVu Sans Mono - Bront' },
 }
 
 local recursive_font_config = {
-  { family = "Rec Mono Linear" },
+  { family = 'Rec Mono Linear' },
   table.unpack(common_family)
 }
 
@@ -38,7 +40,7 @@ end)
 function M.apply_to_config(config)
   config.adjust_window_size_when_changing_font_size = false
   config.font_dirs = { 'fonts' }
-  config.font_size = 16
+  config.font_size = utils.is_apple() and 16 or 12
   config.line_height = 1.2
   config.font = wezterm.font_with_fallback(recursive_font_config)
 end
