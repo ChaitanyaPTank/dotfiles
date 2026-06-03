@@ -50,8 +50,8 @@ function M.apply_to_config(config)
       action = wezterm.action.ActivatePaneDirection('Next')
     },
     {
-      key = '`',
-      mods = 'CTRL',
+      key = 'z',
+      mods = 'LEADER',
       action = wezterm.action.TogglePaneZoomState,
     },
     {
@@ -74,23 +74,35 @@ function M.apply_to_config(config)
     },
     {
       key = "n",
-      mods = "LEADER",
-      action = wezterm.action.SwitchToWorkspace({
-        name = "terminal"
-      })
+      mods = "ALT",
+      action = wezterm.action.PromptInputLine({
+        description = wezterm.format({
+          { Attribute = { Intensity = 'Bold' } },
+          { Foreground = { AnsiColor = 'Fuchsia' } },
+          { Text = 'Enter name for new workspace' },
+        }),
+        action = wezterm.action_callback(function(window, pane, line)
+          if line then
+            window:perform_action(
+              wezterm.action.SwitchToWorkspace({ name = line }),
+              pane
+            )
+          end
+        end),
+      }),
     },
     {
-      key = '9',
+      key = 'l',
       mods = 'ALT',
       action = wezterm.action.ShowLauncherArgs({
-        flags = 'FUZZY|WORKSPACES',
-      }),
+        flags = 'FUZZY|WORKSPACES'
+      })
     },
     {
       key = 'f',
       mods = 'LEADER',
       action = wezterm.action.EmitEvent('change-font')
-    }
+    },
   }
 end
 

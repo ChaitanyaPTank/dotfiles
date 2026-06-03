@@ -88,15 +88,21 @@ wezterm.on('update-status', function(window, pane)
   local background = '#FBB829'
   local foreground = '#1A1A1A'
   local pre = SOLID_RIGHT_ARROW
-  local cwd = pane:get_current_working_dir()
-  if cwd then
-    window:set_right_status(
-      wezterm.format({
-        { Background = { Color = background } },
-        { Foreground = { Color = foreground } },
-        { Text = pre .. window:active_workspace() .. ' ' }
-      })
-    )
+  local panes = window:active_tab():panes()
+  -- if pane is still in mux then only try to setup status
+  for p in ipairs(panes) do
+    if p == pane.pane_id then
+      local cwd = pane:get_current_working_dir()
+      if cwd then
+        window:set_right_status(
+          wezterm.format({
+            { Background = { Color = background } },
+            { Foreground = { Color = foreground } },
+            { Text = pre .. window:active_workspace() .. ' ' }
+          })
+        )
+      end
+    end
   end
 end)
 

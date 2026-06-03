@@ -70,13 +70,13 @@ return {
             input = {
               keys = { ["<C-d>"] = { "bufdelete", mode = { "n", "i" } } }
             }
-          }
+          },
         })
       end,
       desc = "Find Buffer"
     },
     {
-      "fg",
+      "<leader>gf",
       function()
         Snacks.picker.grep({ layout = { preset = "dropdown" } })
       end,
@@ -110,6 +110,12 @@ return {
       "<leader>n",
       function()
         Snacks.picker.notifications({ layout = { preset = "ivy" } })
+      end
+    },
+    {
+      "<leader>gr",
+      function()
+        Snacks.picker.lsp_references({ layout = 'dropdown' })
       end
     }
   }
