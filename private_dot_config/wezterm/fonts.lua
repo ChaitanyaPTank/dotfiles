@@ -19,22 +19,37 @@ local jetbrains_font_config = {
   table.unpack(common_family)
 }
 
-wezterm.on('change-font', function(window, _)
-  local current_font = window:effective_config().font
-  local overrides = window:get_config_overrides() or {}
-  for _, cfg in ipairs(current_font.font) do
-    local rec_mono = cfg.family:find('Rec Mono Linear')
-    if rec_mono then
-      overrides.font = wezterm.font_with_fallback(jetbrains_font_config)
-      overrides.line_height = 1.1
-      break
-    else
-      overrides.font = wezterm.font_with_fallback(recursive_font_config)
-      overrides.line_height = 1.2
-      break
-    end
-  end
-  window:set_config_overrides(overrides)
+local input_font_config = {
+  { family = 'Input' },
+  table.unpack(common_family)
+}
+
+local font_map = {
+  ['1'] = recursive_font_config,
+  ['2'] = jetbrains_font_config,
+  ['3'] = input_font_config,
+}
+
+wezterm.on('change-font', function(window, pane)
+  window:perform_action(wezterm.action.InputSelector({
+    title = 'Select Font',
+    choices = {
+      { id = '1', label = 'Recursive Mono' },
+      { id = '2', label = 'JetBrains Mono' },
+      { id = '3', label = 'Input Mono' },
+    },
+    ---@diagnostic disable-next-line: unused-local, redefined-local
+    action = wezterm.action_callback(function(window, pane, id, label)
+      local overrides = window:get_config_overrides() or {}
+      if id == '2' then
+        overrides.line_height = 1.1
+      else
+        overrides.line_height = 1.2
+      end
+      overrides.font = wezterm.font_with_fallback(font_map[id])
+      window:set_config_overrides(overrides)
+    end)
+  }), pane)
 end)
 
 function M.apply_to_config(config)
@@ -42,6 +57,7 @@ function M.apply_to_config(config)
   config.font_dirs = { 'fonts' }
   config.font_size = utils.is_apple() and 16 or 12
   config.line_height = 1.2
+  -- config.font = wezterm.font_with_fallback(recursive_font_config)
   config.font = wezterm.font_with_fallback(recursive_font_config)
 end
 
