@@ -24,10 +24,16 @@ local input_font_config = {
   table.unpack(common_family)
 }
 
+local iosevka_font_config = {
+  { family = 'Iosevka Term' },
+  table.unpack(common_family)
+}
+
 local font_map = {
   ['1'] = recursive_font_config,
   ['2'] = jetbrains_font_config,
   ['3'] = input_font_config,
+  ['4'] = iosevka_font_config,
 }
 
 wezterm.on('change-font', function(window, pane)
@@ -37,11 +43,12 @@ wezterm.on('change-font', function(window, pane)
       { id = '1', label = 'Recursive Mono' },
       { id = '2', label = 'JetBrains Mono' },
       { id = '3', label = 'Input Mono' },
+      { id = '4', label = 'Iosevka Term' },
     },
     ---@diagnostic disable-next-line: unused-local, redefined-local
     action = wezterm.action_callback(function(window, pane, id, label)
       local overrides = window:get_config_overrides() or {}
-      if id == '2' then
+      if id == '2' or id == '4' then
         overrides.line_height = 1.1
       else
         overrides.line_height = 1.2
@@ -57,7 +64,6 @@ function M.apply_to_config(config)
   config.font_dirs = { 'fonts' }
   config.font_size = utils.is_apple() and 16 or 12
   config.line_height = 1.2
-  -- config.font = wezterm.font_with_fallback(recursive_font_config)
   config.font = wezterm.font_with_fallback(recursive_font_config)
 end
 
