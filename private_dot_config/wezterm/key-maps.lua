@@ -1,75 +1,75 @@
-local wezterm = require 'wezterm'
+local wezterm = require "wezterm"
 
 local M = {}
 
 function M.apply_to_config(config)
-  config.leader = { key = 'a', mods = 'ALT', timeout_milliseconds = 1000 }
+  config.leader = { key = "a", mods = "ALT", timeout_milliseconds = 1000 }
   config.keys = {
     {
-      key = 't',
-      mods = 'LEADER',
-      action = wezterm.action.EmitEvent('toggle-tabbar')
+      key = "t",
+      mods = "LEADER",
+      action = wezterm.action.EmitEvent("toggle-tabbar")
     },
     {
-      key = 'b',
-      mods = 'LEADER',
-      action = wezterm.action.EmitEvent('toggle-bg-image')
+      key = "b",
+      mods = "LEADER",
+      action = wezterm.action.EmitEvent("toggle-bg-image")
     },
     {
-      key = '-',
-      mods = 'LEADER',
-      action = wezterm.action.SplitVertical({ domain = 'CurrentPaneDomain' }),
+      key = "-",
+      mods = "LEADER",
+      action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
     },
     {
-      key = '|',
-      mods = 'LEADER',
-      action = wezterm.action.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
+      key = "|",
+      mods = "LEADER",
+      action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
     },
     {
-      key = 'F11',
+      key = "F11",
       action = wezterm.action.ToggleFullScreen,
     },
     {
-      key = 'r',
-      mods = 'CMD|SHIFT',
+      key = "r",
+      mods = "CMD|SHIFT",
       action = wezterm.action.ReloadConfiguration,
     },
     {
-      key = 'w',
-      mods = 'CTRL|SHIFT',
+      key = "w",
+      mods = "CTRL|SHIFT",
       action = wezterm.action.CloseCurrentTab({ confirm = false })
     },
     {
-      key = 'LeftArrow',
-      mods = 'ALT',
-      action = wezterm.action.ActivatePaneDirection('Prev')
+      key = "LeftArrow",
+      mods = "ALT",
+      action = wezterm.action.ActivatePaneDirection("Prev")
     },
     {
-      key = 'RightArrow',
-      mods = 'ALT',
-      action = wezterm.action.ActivatePaneDirection('Next')
+      key = "RightArrow",
+      mods = "ALT",
+      action = wezterm.action.ActivatePaneDirection("Next")
     },
     {
-      key = 'z',
-      mods = 'LEADER',
+      key = "z",
+      mods = "LEADER",
       action = wezterm.action.TogglePaneZoomState,
     },
     {
-      key = 'm',
-      mods = 'LEADER',
+      key = "m",
+      mods = "LEADER",
       action = wezterm.action.TogglePaneZoomState,
     },
     {
-      key = 'P',
-      mods = 'CTRL|SHIFT',
+      key = "P",
+      mods = "CTRL|SHIFT",
       action = wezterm.action.ActivateCommandPalette,
     },
     {
-      key = ' ',
-      mods = 'CTRL',
+      key = " ",
+      mods = "CTRL",
       action = wezterm.action.SendKey({
-        key = ' ',
-        mods = 'CTRL',
+        key = " ",
+        mods = "CTRL",
       }),
     },
     {
@@ -77,9 +77,9 @@ function M.apply_to_config(config)
       mods = "ALT",
       action = wezterm.action.PromptInputLine({
         description = wezterm.format({
-          { Attribute = { Intensity = 'Bold' } },
-          { Foreground = { AnsiColor = 'Fuchsia' } },
-          { Text = 'Enter name for new workspace' },
+          { Attribute = { Intensity = "Bold" } },
+          { Foreground = { AnsiColor = "Fuchsia" } },
+          { Text = "Enter name for new workspace" },
         }),
         action = wezterm.action_callback(function(window, pane, line)
           if line then
@@ -92,17 +92,27 @@ function M.apply_to_config(config)
       }),
     },
     {
-      key = 'l',
-      mods = 'ALT',
+      key = "l",
+      mods = "ALT",
       action = wezterm.action.ShowLauncherArgs({
-        flags = 'FUZZY|WORKSPACES'
+        flags = "WORKSPACES"
       })
     },
     {
-      key = 'f',
-      mods = 'LEADER',
-      action = wezterm.action.EmitEvent('change-font')
+      key = "f",
+      mods = "LEADER",
+      action = wezterm.action.EmitEvent("change-font")
     },
+    {
+      key = "[",
+      mods = "ALT",
+      action = wezterm.action.SwitchWorkspaceRelative(-1)
+    },
+    {
+      key = "]",
+      mods = "ALT",
+      action = wezterm.action.SwitchWorkspaceRelative(1)
+    }
   }
 end
 

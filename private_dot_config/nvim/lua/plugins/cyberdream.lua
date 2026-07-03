@@ -15,7 +15,7 @@ return {
     -- Modern borderless telescope theme - also applies to fzf-lua
     borderless_pickers = false,
 
-    saturation = 0.7, -- accepts a value between 0 and 1. 0 will be fully desaturated (greyscale) and 1 will be the full color (default)
+    saturation = 0.6, -- accepts a value between 0 and 1. 0 will be fully desaturated (greyscale) and 1 will be the full color (default)
 
     -- Disable or enable colorscheme extensions
     extensions = {

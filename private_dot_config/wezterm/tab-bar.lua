@@ -1,11 +1,11 @@
-local wezterm = require('wezterm')
+local wezterm = require("wezterm")
 
 local M = {}
 
 local colors = {
   BG = "#1A1A1A",
   FG = "#808080",
-  FG_ACTIVE = '#2C1B19',
+  FG_ACTIVE = "#2C1B19",
   BG_ACTIVE = "#FBB829",
   FG_INACTIVE = "#1C1B19",
   BG_INACTIVE = "#4E4E4E",
@@ -36,7 +36,7 @@ local function tab_title(tab_info)
 end
 
 ---@diagnostic disable-next-line: unused-local, redefined-local
-wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
   local edge_background = colors.BG
   local background = colors.BG_INACTIVE
   local foreground = colors.FG_INACTIVE
@@ -84,26 +84,19 @@ local function toggle_tab_bar(window, _)
   window:set_config_overrides(overrides)
 end
 
-wezterm.on('update-status', function(window, pane)
-  local background = '#FBB829'
-  local foreground = '#1A1A1A'
+---@diagnostic disable-next-line: unused-local
+wezterm.on("update-status", function(window, pane)
+  local background = "#FBB829"
+  local foreground = "#1A1A1A"
   local pre = SOLID_RIGHT_ARROW
-  local panes = window:active_tab():panes()
   -- if pane is still in mux then only try to setup status
-  for p in ipairs(panes) do
-    if p == pane.pane_id then
-      local cwd = pane:get_current_working_dir()
-      if cwd then
-        window:set_right_status(
-          wezterm.format({
-            { Background = { Color = background } },
-            { Foreground = { Color = foreground } },
-            { Text = pre .. window:active_workspace() .. ' ' }
-          })
-        )
-      end
-    end
-  end
+  window:set_right_status(
+    wezterm.format({
+      { Background = { Color = background } },
+      { Foreground = { Color = foreground } },
+      { Text = pre .. window:active_workspace() .. " " }
+    })
+  )
 end)
 
 wezterm.on("toggle-tabbar", toggle_tab_bar)
@@ -120,15 +113,15 @@ function M.apply_to_config(config)
       active_tab = {
         bg_color = colors.BG_ACTIVE,
         fg_color = colors.FG_ACTIVE,
-        intensity = 'Bold',
-        underline = 'None',
+        intensity = "Bold",
+        underline = "None",
         italic = false,
         strikethrough = false,
       },
       inactive_tab = {
         bg_color = colors.BG,
         fg_color = colors.FG,
-        underline = 'None',
+        underline = "None",
       },
       inactive_tab_hover = {
         bg_color = colors.BG_ACTIVE,
@@ -137,7 +130,7 @@ function M.apply_to_config(config)
       },
       new_tab = {
         bg_color = colors.BG,
-        fg_color = colors.FG_ACTIVE,
+        fg_color = colors.FG,
       },
       new_tab_hover = {
         bg_color = colors.BG_ACTIVE,

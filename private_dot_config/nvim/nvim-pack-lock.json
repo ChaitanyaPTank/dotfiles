@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "base16-nvim": {
+      "rev": "23e5128eb5f629c29532c24a1e733cbe019f05bb",
+      "src": "https://github.com/RRethy/base16-nvim"
+    }
+  }
+}

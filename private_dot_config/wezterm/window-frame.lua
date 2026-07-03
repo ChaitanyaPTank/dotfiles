@@ -1,4 +1,4 @@
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 
 local BG_COLOR = "#3A3A3A"
 local BG_COLOR_ACTIVE = "#38393B"
@@ -11,8 +11,8 @@ return {
   -- main font setting appended to it to pick up any
   -- fallback fonts you may have used there.
   font = wezterm.font_with_fallback({
-    { family = 'Inter',     weight = 'Regular' },
-    { family = 'Helvetica', weight = 'Regular' },
+    { family = "Inter",     weight = "Regular" },
+    { family = "Helvetica", weight = "Regular" },
   }),
 
   -- The size of the font in the tab bar.
