@@ -13,7 +13,10 @@ function M.apply_to_config(config)
     {
       key = "b",
       mods = "LEADER",
-      action = wezterm.action.EmitEvent("toggle-bg-image")
+      action = wezterm.action.ActivateKeyTable({
+        name = "background",
+        one_shot = false,
+      }),
     },
     {
       key = "-",
@@ -112,6 +115,20 @@ function M.apply_to_config(config)
       key = "]",
       mods = "ALT",
       action = wezterm.action.SwitchWorkspaceRelative(1)
+    }
+  }
+  config.key_tables = {
+    background = {
+      { key = "b", action = wezterm.action.EmitEvent("toggle-bg-image") },
+      { key = "n", action = wezterm.action.EmitEvent("next-image") },
+      {
+        key = "n", mods = "SHIFT", action = wezterm.action.EmitEvent("prev-image")
+      },
+      {
+        key = "_", mods = "SHIFT", action = wezterm.action.EmitEvent("inc-brightness")
+      },
+      { key = "-",      action = wezterm.action.EmitEvent("dec-brightness") },
+      { key = "Escape", action = "PopKeyTable" },
     }
   }
 end
