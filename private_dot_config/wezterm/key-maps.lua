@@ -58,11 +58,6 @@ function M.apply_to_config(config)
       action = wezterm.action.TogglePaneZoomState,
     },
     {
-      key = "m",
-      mods = "LEADER",
-      action = wezterm.action.TogglePaneZoomState,
-    },
-    {
       key = "P",
       mods = "CTRL|SHIFT",
       action = wezterm.action.ActivateCommandPalette,
@@ -104,7 +99,10 @@ function M.apply_to_config(config)
     {
       key = "f",
       mods = "LEADER",
-      action = wezterm.action.EmitEvent("change-font")
+      action = wezterm.action.ActivateKeyTable({
+        name = "fonts",
+        one_shot = false,
+      }),
     },
     {
       key = "[",
@@ -128,6 +126,14 @@ function M.apply_to_config(config)
         key = "_", mods = "SHIFT", action = wezterm.action.EmitEvent("inc-brightness")
       },
       { key = "-",      action = wezterm.action.EmitEvent("dec-brightness") },
+      { key = "Escape", action = "PopKeyTable" },
+    },
+    fonts = {
+      { key = "f", action = wezterm.action.EmitEvent("change-font") },
+      { key = "n", action = wezterm.action.EmitEvent("next-font") },
+      {
+        key = "n", mods = "SHIFT", action = wezterm.action.EmitEvent("prev-font")
+      },
       { key = "Escape", action = "PopKeyTable" },
     }
   }
